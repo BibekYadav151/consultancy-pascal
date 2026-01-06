@@ -40,7 +40,6 @@ const Navbar = () => {
           <li><Link to="/universities" className={isActive('/universities') ? 'active' : ''}>Universities</Link></li>
           <li><Link to="/blog" className={isActive('/blog') ? 'active' : ''}>Blog</Link></li>
           <li><Link to="/contact" className={isActive('/contact') ? 'active' : ''}>Contact</Link></li>
-          <li><Link to="/admin" className="btn-admin">Admin</Link></li>
         </ul>
       </div>
     </nav>

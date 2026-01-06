@@ -64,6 +64,17 @@ const Footer = () => {
         </div>
         <div className="footer-bottom">
           <p>&copy; {new Date().getFullYear()} {settings.site_name || 'BIG Partnership'}. All rights reserved.</p>
+          <p className="footer-developer">
+            Developed by{' '}
+            <a 
+              href="https://thewisdomtechnologies.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="wisdom-link"
+            >
+              Wisdom Technologies
+            </a>
+          </p>
         </div>
       </div>
     </footer>

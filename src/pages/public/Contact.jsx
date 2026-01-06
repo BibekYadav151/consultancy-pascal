@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaWhatsapp } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import { enquiriesAPI, countriesAPI, settingsAPI } from '../../services/api';
 import './Contact.css';
 
@@ -17,7 +17,6 @@ const Contact = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
 
-  const whatsappNumber = (settings.whatsapp_number || '').replace(/\D/g, '');
 
   useEffect(() => {
     countriesAPI.getAll({ status: 'active' })
@@ -88,17 +87,22 @@ const Contact = () => {
                     <p>{settings.contact_email || 'info@consultancy.com'}</p>
                   </div>
                 </div>
-                {whatsappNumber && (
-                  <div className="contact-info-item">
-                    <FaWhatsapp className="contact-icon" />
-                    <div>
-                      <h4>WhatsApp</h4>
-                      <a href={`https://wa.me/${whatsappNumber}`} className="whatsapp-link">
-                        Chat with us
-                      </a>
-                    </div>
-                  </div>
-                )}
+              </div>
+
+              <div className="contact-map-small">
+                <h4>Location</h4>
+                <div className="small-map-container">
+                  <iframe
+                    src={`https://www.google.com/maps?q=${27.703456},${85.320315}&hl=en&z=15&output=embed`}
+                    width="100%"
+                    height="250"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="BIG Partnership Location"
+                  ></iframe>
+                </div>
               </div>
 
               <div className="office-hours">
