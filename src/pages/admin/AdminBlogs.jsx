@@ -187,7 +187,7 @@ const AdminBlogs = () => {
 
             <div className="form-group span-2">
               <label>Featured Image</label>
-              <input type="file" accept="image/*" onChange={handleFile} />
+              <input type="file" name="featured_image" accept="image/*" onChange={handleFile} />
               {editing?.featured_image && (
                 <div className="admin-image-preview">
                   <img src={`${BACKEND_URL}/uploads/blogs/${editing.featured_image}`} alt="Featured" style={{ width: 54, height: 40 }} />

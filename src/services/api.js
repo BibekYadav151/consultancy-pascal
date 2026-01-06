@@ -27,36 +27,24 @@ export const authAPI = {
 export const countriesAPI = {
   getAll: (params) => api.get('/countries', { params }),
   getBySlug: (slug) => api.get(`/countries/${slug}`),
-  create: (data) => api.post('/countries', data, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  }),
-  update: (id, data) => api.put(`/countries/${id}`, data, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  }),
+  create: (data) => api.post('/countries', data),
+  update: (id, data) => api.put(`/countries/${id}`, data),
   delete: (id) => api.delete(`/countries/${id}`),
 };
 
 export const universitiesAPI = {
   getAll: (params) => api.get('/universities', { params }),
   getBySlug: (slug) => api.get(`/universities/${slug}`),
-  create: (data) => api.post('/universities', data, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  }),
-  update: (id, data) => api.put(`/universities/${id}`, data, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  }),
+  create: (data) => api.post('/universities', data),
+  update: (id, data) => api.put(`/universities/${id}`, data),
   delete: (id) => api.delete(`/universities/${id}`),
 };
 
 export const blogsAPI = {
   getAll: (params) => api.get('/blogs', { params }),
   getBySlug: (slug) => api.get(`/blogs/${slug}`),
-  create: (data) => api.post('/blogs', data, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  }),
-  update: (id, data) => api.put(`/blogs/${id}`, data, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  }),
+  create: (data) => api.post('/blogs', data),
+  update: (id, data) => api.put(`/blogs/${id}`, data),
   delete: (id) => api.delete(`/blogs/${id}`),
 };
 
