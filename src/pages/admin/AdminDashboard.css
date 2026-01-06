@@ -195,6 +195,18 @@
   color: #065f46;
 }
 
+.status-badge.active,
+.status-badge.published {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge.inactive,
+.status-badge.draft {
+  background: #e5e7eb;
+  color: #374151;
+}
+
 .admin-loading {
   display: flex;
   align-items: center;

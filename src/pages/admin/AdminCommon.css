@@ -1,0 +1,136 @@
+.admin-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-page-header h1 {
+  margin: 0;
+  color: #2d3748;
+}
+
+.admin-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.admin-toolbar input,
+.admin-toolbar select {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  min-width: 200px;
+}
+
+.admin-table-wrap {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: top;
+}
+
+.admin-table th {
+  background: #f7fafc;
+  font-weight: 700;
+  color: #2d3748;
+}
+
+.admin-table td {
+  color: #4a5568;
+}
+
+.admin-actions {
+  display: inline-flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.admin-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.admin-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.admin-form label {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.admin-form textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.admin-form .span-2 {
+  grid-column: span 2;
+}
+
+.admin-image-preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #718096;
+}
+
+.admin-image-preview img {
+  width: 48px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+@media (max-width: 900px) {
+  .admin-form {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-form .span-2 {
+    grid-column: span 1;
+  }
+
+  .admin-toolbar input,
+  .admin-toolbar select {
+    min-width: unset;
+    flex: 1;
+  }
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { blogsAPI } from '../../services/api';
+import { BACKEND_URL, blogsAPI } from '../../services/api';
 import './Blog.css';
 
 const Blog = () => {
@@ -52,7 +52,7 @@ const Blog = () => {
               {filteredBlogs.map(blog => (
                 <Link to={`/blog/${blog.slug}`} key={blog.id} className="blog-card">
                   {blog.featured_image && (
-                    <img src={`http://localhost:3000/uploads/blogs/${blog.featured_image}`} alt={blog.title} />
+                    <img src={`${BACKEND_URL}/uploads/blogs/${blog.featured_image}`} alt={blog.title} />
                   )}
                   <div className="blog-content-card">
                     {blog.category && <span className="blog-category">{blog.category}</span>}
@@ -101,9 +101,9 @@ export const BlogDetail = () => {
       <article className="blog-article">
         <div className="container">
           {blog.featured_image && (
-            <img 
-              src={`http://localhost:3000/uploads/blogs/${blog.featured_image}`} 
-              alt={blog.title} 
+            <img
+              src={`${BACKEND_URL}/uploads/blogs/${blog.featured_image}`}
+              alt={blog.title}
               className="featured-image"
             />
           )}

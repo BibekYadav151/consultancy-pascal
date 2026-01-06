@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { countriesAPI } from '../../services/api';
+import { BACKEND_URL, countriesAPI } from '../../services/api';
 import './Destinations.css';
 
 const Destinations = () => {
@@ -52,7 +52,7 @@ const Destinations = () => {
               {filteredCountries.map(country => (
                 <Link to={`/destinations/${country.slug}`} key={country.id} className="country-card">
                   {country.flag_image && (
-                    <img src={`http://localhost:3000/uploads/countries/${country.flag_image}`} alt={country.name} />
+                    <img src={`${BACKEND_URL}/uploads/countries/${country.flag_image}`} alt={country.name} />
                   )}
                   <div className="card-content">
                     <h3>{country.name}</h3>
@@ -99,7 +99,7 @@ export const CountryDetail = () => {
     <div className="country-detail-page">
       <section className="country-hero" style={{
         backgroundImage: country.banner_image ? 
-          `url(http://localhost:3000/uploads/countries/${country.banner_image})` : 
+          `url(${BACKEND_URL}/uploads/countries/${country.banner_image})` : 
           'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
       }}>
         <div className="container">

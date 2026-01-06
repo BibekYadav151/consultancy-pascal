@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './AdminLogin.css';
@@ -6,14 +6,20 @@ import './AdminLogin.css';
 const AdminLogin = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const [submitting, setSubmitting] = useState(false);
+  const { login, user, loading } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loading && user) {
+      navigate('/admin/dashboard', { replace: true });
+    }
+  }, [loading, user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    setLoading(true);
+    setSubmitting(true);
 
     try {
       await login(credentials);
@@ -21,7 +27,7 @@ const AdminLogin = () => {
     } catch (err) {
       setError(err.response?.data?.error || 'Login failed. Please check your credentials.');
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   };
 
@@ -55,8 +61,8 @@ const AdminLogin = () => {
                 placeholder="••••••••"
               />
             </div>
-            <button type="submit" className="btn btn-primary btn-full" disabled={loading}>
-              {loading ? 'Signing in...' : 'Sign In'}
+            <button type="submit" className="btn btn-primary btn-full" disabled={submitting}>
+              {submitting ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
           

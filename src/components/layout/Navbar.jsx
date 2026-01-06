@@ -16,7 +16,7 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const isActive = (path) => location.pathname === path;
+  const isActive = (path) => location.pathname === path || location.pathname.startsWith(`${path}/`);
 
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
@@ -37,6 +37,7 @@ const Navbar = () => {
           <li><Link to="/" className={isActive('/') ? 'active' : ''}>Home</Link></li>
           <li><Link to="/about" className={isActive('/about') ? 'active' : ''}>About</Link></li>
           <li><Link to="/destinations" className={isActive('/destinations') ? 'active' : ''}>Destinations</Link></li>
+          <li><Link to="/universities" className={isActive('/universities') ? 'active' : ''}>Universities</Link></li>
           <li><Link to="/blog" className={isActive('/blog') ? 'active' : ''}>Blog</Link></li>
           <li><Link to="/contact" className={isActive('/contact') ? 'active' : ''}>Contact</Link></li>
           <li><Link to="/admin" className="btn-admin">Admin</Link></li>

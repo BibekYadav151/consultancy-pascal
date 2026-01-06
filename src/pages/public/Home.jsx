@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaGraduationCap, FaPassport, FaUserTie, FaPhone, FaWhatsapp } from 'react-icons/fa';
-import { countriesAPI, universitiesAPI, blogsAPI, settingsAPI } from '../../services/api';
+import { BACKEND_URL, countriesAPI, universitiesAPI, blogsAPI, settingsAPI } from '../../services/api';
 import './Home.css';
 
 const Home = () => {
@@ -27,6 +27,8 @@ const Home = () => {
       .then(response => setSettings(response.data))
       .catch(error => console.error('Failed to fetch settings:', error));
   }, []);
+
+  const whatsappNumber = (settings.whatsapp_number || '').replace(/\D/g, '');
 
   return (
     <div className="home">
@@ -57,7 +59,7 @@ const Home = () => {
             {countries.map(country => (
               <Link to={`/destinations/${country.slug}`} key={country.id} className="country-card">
                 {country.flag_image && (
-                  <img src={`http://localhost:3000/uploads/countries/${country.flag_image}`} alt={country.name} />
+                  <img src={`${BACKEND_URL}/uploads/countries/${country.flag_image}`} alt={country.name} />
                 )}
                 <h3>{country.name}</h3>
                 <p>{country.short_description}</p>
@@ -80,12 +82,15 @@ const Home = () => {
             {universities.map(university => (
               <div key={university.id} className="university-card">
                 {university.logo && (
-                  <img src={`http://localhost:3000/uploads/universities/${university.logo}`} alt={university.name} />
+                  <img src={`${BACKEND_URL}/uploads/universities/${university.logo}`} alt={university.name} />
                 )}
                 <h4>{university.name}</h4>
                 <p>{university.location}</p>
               </div>
             ))}
+          </div>
+          <div className="text-center">
+            <Link to="/universities" className="btn btn-outline">View All Universities</Link>
           </div>
         </div>
       </section>
@@ -152,7 +157,7 @@ const Home = () => {
             {blogs.map(blog => (
               <Link to={`/blog/${blog.slug}`} key={blog.id} className="blog-card">
                 {blog.featured_image && (
-                  <img src={`http://localhost:3000/uploads/blogs/${blog.featured_image}`} alt={blog.title} />
+                  <img src={`${BACKEND_URL}/uploads/blogs/${blog.featured_image}`} alt={blog.title} />
                 )}
                 <div className="blog-content">
                   <span className="blog-category">{blog.category}</span>
@@ -173,8 +178,8 @@ const Home = () => {
           <h2>Ready to Start Your Journey?</h2>
           <p>Get in touch with our expert counselors today</p>
           <div className="cta-buttons">
-            {settings.whatsapp_number && (
-              <a href={`https://wa.me/${settings.whatsapp_number}`} className="btn btn-success">
+            {whatsappNumber && (
+              <a href={`https://wa.me/${whatsappNumber}`} className="btn btn-success">
                 <FaWhatsapp /> WhatsApp Us
               </a>
             )}

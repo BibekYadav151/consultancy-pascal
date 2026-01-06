@@ -17,6 +17,8 @@ const Contact = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
 
+  const whatsappNumber = (settings.whatsapp_number || '').replace(/\D/g, '');
+
   useEffect(() => {
     countriesAPI.getAll({ status: 'active' })
       .then(response => setCountries(response.data))
@@ -86,12 +88,12 @@ const Contact = () => {
                     <p>{settings.contact_email || 'info@consultancy.com'}</p>
                   </div>
                 </div>
-                {settings.whatsapp_number && (
+                {whatsappNumber && (
                   <div className="contact-info-item">
                     <FaWhatsapp className="contact-icon" />
                     <div>
                       <h4>WhatsApp</h4>
-                      <a href={`https://wa.me/${settings.whatsapp_number}`} className="whatsapp-link">
+                      <a href={`https://wa.me/${whatsappNumber}`} className="whatsapp-link">
                         Chat with us
                       </a>
                     </div>

@@ -13,6 +13,8 @@ const Footer = () => {
       .catch(error => console.error('Failed to fetch settings:', error));
   }, []);
 
+  const whatsappNumber = (settings.whatsapp_number || '').replace(/\D/g, '');
+
   return (
     <footer className="footer">
       <div className="container">
@@ -33,6 +35,7 @@ const Footer = () => {
               <li><Link to="/">Home</Link></li>
               <li><Link to="/about">About Us</Link></li>
               <li><Link to="/destinations">Destinations</Link></li>
+              <li><Link to="/universities">Universities</Link></li>
               <li><Link to="/blog">Blog</Link></li>
               <li><Link to="/contact">Contact</Link></li>
             </ul>
@@ -52,8 +55,8 @@ const Footer = () => {
             <p>{settings.contact_address}</p>
             <p>Email: {settings.contact_email}</p>
             <p>Phone: {settings.contact_phone}</p>
-            {settings.whatsapp_number && (
-              <a href={`https://wa.me/${settings.whatsapp_number}`} className="whatsapp-link">
+            {whatsappNumber && (
+              <a href={`https://wa.me/${whatsappNumber}`} className="whatsapp-link">
                 <FaWhatsapp /> WhatsApp Us
               </a>
             )}
