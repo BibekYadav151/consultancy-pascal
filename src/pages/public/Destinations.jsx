@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { BACKEND_URL, countriesAPI } from '../../services/api';
+import RichTextContent from '../../components/common/RichTextContent';
 import './Destinations.css';
+
+const stripHtml = (html = '') => {
+  if (!html) return '';
+  return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+};
 
 const Destinations = () => {
   const [countries, setCountries] = useState([]);
@@ -56,7 +62,7 @@ const Destinations = () => {
                   )}
                   <div className="card-content">
                     <h3>{country.name}</h3>
-                    <p>{country.short_description}</p>
+                    <p>{stripHtml(country.short_description)}</p>
                     <span className="read-more">Learn More →</span>
                   </div>
                 </Link>
@@ -111,27 +117,27 @@ export const CountryDetail = () => {
         <div className="container">
           <div className="content-section">
             <h2>About {country.name}</h2>
-            <p>{country.description}</p>
+            <RichTextContent html={country.description} />
           </div>
 
           {country.education_system && (
             <div className="content-section">
               <h2>Education System</h2>
-              <p>{country.education_system}</p>
+              <RichTextContent html={country.education_system} />
             </div>
           )}
 
           {country.cost_of_living && (
             <div className="content-section">
               <h2>Cost of Living</h2>
-              <p>{country.cost_of_living}</p>
+              <RichTextContent html={country.cost_of_living} />
             </div>
           )}
 
           {country.visa_info && (
             <div className="content-section">
               <h2>Visa Information</h2>
-              <p>{country.visa_info}</p>
+              <RichTextContent html={country.visa_info} />
             </div>
           )}
 

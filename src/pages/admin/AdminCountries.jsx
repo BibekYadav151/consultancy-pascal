@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BACKEND_URL, countriesAPI } from '../../services/api';
+import RichTextEditor from '../../components/admin/RichTextEditor';
 import './AdminCommon.css';
 
 const emptyForm = {
@@ -89,6 +90,10 @@ const AdminCountries = () => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleRichChange = (name) => (value) => {
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
   const buildFormData = () => {
     const fd = new FormData();
     fd.append('name', form.name);
@@ -165,23 +170,43 @@ const AdminCountries = () => {
 
             <div className="form-group span-2">
               <label>Short Description</label>
-              <textarea name="short_description" value={form.short_description} onChange={handleChange} />
+              <RichTextEditor
+                value={form.short_description}
+                onChange={handleRichChange('short_description')}
+                minHeight={120}
+              />
             </div>
             <div className="form-group span-2">
               <label>Description</label>
-              <textarea name="description" value={form.description} onChange={handleChange} />
+              <RichTextEditor
+                value={form.description}
+                onChange={handleRichChange('description')}
+                minHeight={180}
+              />
             </div>
             <div className="form-group span-2">
               <label>Education System</label>
-              <textarea name="education_system" value={form.education_system} onChange={handleChange} />
+              <RichTextEditor
+                value={form.education_system}
+                onChange={handleRichChange('education_system')}
+                minHeight={160}
+              />
             </div>
             <div className="form-group span-2">
               <label>Cost of Living</label>
-              <textarea name="cost_of_living" value={form.cost_of_living} onChange={handleChange} />
+              <RichTextEditor
+                value={form.cost_of_living}
+                onChange={handleRichChange('cost_of_living')}
+                minHeight={160}
+              />
             </div>
             <div className="form-group span-2">
               <label>Visa Info</label>
-              <textarea name="visa_info" value={form.visa_info} onChange={handleChange} />
+              <RichTextEditor
+                value={form.visa_info}
+                onChange={handleRichChange('visa_info')}
+                minHeight={160}
+              />
             </div>
 
             <div className="form-group">

@@ -1,0 +1,25 @@
+.admin-rte .ql-toolbar.ql-snow {
+  border: 1px solid var(--border-color);
+  border-radius: 8px 8px 0 0;
+  background: var(--bg-light);
+}
+
+.admin-rte .ql-container.ql-snow {
+  border: 1px solid var(--border-color);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  background: var(--bg-white);
+  font-family: var(--font-body);
+  color: var(--text-primary);
+}
+
+.admin-rte .ql-editor {
+  min-height: var(--rte-min-height, 150px);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.admin-rte:focus-within .ql-toolbar.ql-snow,
+.admin-rte:focus-within .ql-container.ql-snow {
+  border-color: var(--primary-color);
+}

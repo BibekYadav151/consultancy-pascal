@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { BACKEND_URL, countriesAPI, universitiesAPI } from '../../services/api';
+import RichTextContent from '../../components/common/RichTextContent';
 import './Universities.css';
 
 const Universities = () => {
@@ -140,35 +141,35 @@ export const UniversityDetail = () => {
             {uni.programs_offered && (
               <div className="detail-section">
                 <h3>Programs Offered</h3>
-                <p>{uni.programs_offered}</p>
+                <RichTextContent html={uni.programs_offered} />
               </div>
             )}
 
             {uni.tuition_fees && (
               <div className="detail-section">
                 <h3>Tuition Fees</h3>
-                <p>{uni.tuition_fees}</p>
+                <RichTextContent html={uni.tuition_fees} />
               </div>
             )}
 
             {uni.entry_requirements && (
               <div className="detail-section">
                 <h3>Entry Requirements</h3>
-                <p>{uni.entry_requirements}</p>
+                <RichTextContent html={uni.entry_requirements} />
               </div>
             )}
 
             {uni.intake_details && (
               <div className="detail-section">
                 <h3>Intake Details</h3>
-                <p>{uni.intake_details}</p>
+                <RichTextContent html={uni.intake_details} />
               </div>
             )}
 
             {uni.scholarship_info && (
               <div className="detail-section">
                 <h3>Scholarship Info</h3>
-                <p>{uni.scholarship_info}</p>
+                <RichTextContent html={uni.scholarship_info} />
               </div>
             )}
 

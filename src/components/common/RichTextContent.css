@@ -1,0 +1,14 @@
+.rich-text-content ul,
+.rich-text-content ol {
+  padding-left: 1.25rem;
+  margin: 0.75rem 0;
+}
+
+.rich-text-content li {
+  margin: 0.25rem 0;
+}
+
+.rich-text-content a {
+  color: var(--primary-color);
+  text-decoration: underline;
+}

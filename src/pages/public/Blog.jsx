@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { BACKEND_URL, blogsAPI } from '../../services/api';
+import RichTextContent from '../../components/common/RichTextContent';
 import './Blog.css';
+
+const stripHtml = (html = '') => {
+  if (!html) return '';
+  return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+};
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -57,7 +63,7 @@ const Blog = () => {
                   <div className="blog-content-card">
                     {blog.category && <span className="blog-category">{blog.category}</span>}
                     <h3>{blog.title}</h3>
-                    <p>{blog.short_description}</p>
+                    <p>{stripHtml(blog.short_description)}</p>
                     <span className="read-more">Read More →</span>
                   </div>
                 </Link>
@@ -119,7 +125,7 @@ export const BlogDetail = () => {
             </p>
           </div>
           <div className="article-content">
-            <p>{blog.content}</p>
+            <RichTextContent html={blog.content} />
           </div>
           <div className="article-footer">
             <Link to="/blog" className="btn btn-outline">← Back to Blog</Link>

@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BACKEND_URL, blogsAPI } from '../../services/api';
+import RichTextEditor from '../../components/admin/RichTextEditor';
 import './AdminCommon.css';
 
 const emptyForm = {
@@ -79,6 +80,10 @@ const AdminBlogs = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleRichChange = (name) => (value) => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -167,12 +172,16 @@ const AdminBlogs = () => {
 
             <div className="form-group span-2">
               <label>Short Description</label>
-              <textarea name="short_description" value={form.short_description} onChange={handleChange} />
+              <RichTextEditor
+                value={form.short_description}
+                onChange={handleRichChange('short_description')}
+                minHeight={120}
+              />
             </div>
 
             <div className="form-group span-2">
               <label>Content</label>
-              <textarea name="content" value={form.content} onChange={handleChange} style={{ minHeight: 180 }} />
+              <RichTextEditor value={form.content} onChange={handleRichChange('content')} minHeight={260} />
             </div>
 
             <div className="form-group">

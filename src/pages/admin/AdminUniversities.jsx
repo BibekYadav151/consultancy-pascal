@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BACKEND_URL, countriesAPI, universitiesAPI } from '../../services/api';
+import RichTextEditor from '../../components/admin/RichTextEditor';
 import './AdminCommon.css';
 
 const emptyForm = {
@@ -91,6 +92,10 @@ const AdminUniversities = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleRichChange = (name) => (value) => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -201,26 +206,47 @@ const AdminUniversities = () => {
 
             <div className="form-group span-2">
               <label>Programs Offered</label>
-              <textarea name="programs_offered" value={form.programs_offered} onChange={handleChange} />
+              <RichTextEditor
+                value={form.programs_offered}
+                onChange={handleRichChange('programs_offered')}
+                minHeight={160}
+              />
             </div>
 
-            <div className="form-group">
+            <div className="form-group span-2">
               <label>Tuition Fees</label>
-              <input name="tuition_fees" value={form.tuition_fees} onChange={handleChange} />
+              <RichTextEditor
+                value={form.tuition_fees}
+                onChange={handleRichChange('tuition_fees')}
+                minHeight={120}
+              />
             </div>
-            <div className="form-group">
+
+            <div className="form-group span-2">
               <label>Intake Details</label>
-              <input name="intake_details" value={form.intake_details} onChange={handleChange} />
+              <RichTextEditor
+                value={form.intake_details}
+                onChange={handleRichChange('intake_details')}
+                minHeight={120}
+              />
             </div>
 
             <div className="form-group span-2">
               <label>Entry Requirements</label>
-              <textarea name="entry_requirements" value={form.entry_requirements} onChange={handleChange} />
+              <RichTextEditor
+                value={form.entry_requirements}
+                onChange={handleRichChange('entry_requirements')}
+                minHeight={160}
+              />
             </div>
 
             <div className="form-group span-2">
               <label>Scholarship Info</label>
-              <textarea name="scholarship_info" value={form.scholarship_info} onChange={handleChange} />
+              <RichTextEditor
+                value={form.scholarship_info}
+                onChange={handleRichChange('scholarship_info')}
+                minHeight={160}
+              />
             </div>
 
             <div className="form-group span-2">
