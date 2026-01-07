@@ -23,7 +23,7 @@ const Navbar = () => {
       <div className="nav-container">
         <Link to="/" className="logo">
           <h2>BIG <span>Partnership</span></h2>
-          <span className="tagline">Global Education</span>
+          <span className="tagline">BRITTS IMPERIAL GLOBAL PARTNERSHIP</span>
         </Link>
         
         <button 

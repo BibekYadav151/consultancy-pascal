@@ -54,8 +54,18 @@ app.use(morgan('dev')); // Logging
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
-// Serve static files
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Serve static files - must be before API routes
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
+  setHeaders: (res, filePath) => {
+    // Set proper headers for images
+    if (filePath.endsWith('.jpg') || filePath.endsWith('.jpeg') || 
+        filePath.endsWith('.png') || filePath.endsWith('.gif') || 
+        filePath.endsWith('.webp')) {
+      res.setHeader('Content-Type', 'image/' + filePath.split('.').pop());
+      res.setHeader('Cache-Control', 'public, max-age=31536000');
+    }
+  }
+}));
 
 // Health check endpoint
 app.get('/health', (req, res) => {
@@ -78,6 +88,8 @@ app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}`);
   console.log(`📡 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🌐 Health check: http://localhost:${PORT}/health`);
+  console.log(`📁 Uploads directory: ${path.join(__dirname, 'uploads')}`);
+  console.log(`🖼️  Static files: http://localhost:${PORT}/uploads/`);
 });
 
 export default app;

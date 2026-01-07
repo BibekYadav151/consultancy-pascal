@@ -72,6 +72,9 @@ export const createCountry = (req, res) => {
     const flagImage = req.files?.flag_image?.[0]?.filename || null;
     const bannerImage = req.files?.banner_image?.[0]?.filename || null;
 
+    console.log('Create country - Flag image:', flagImage, 'Banner image:', bannerImage);
+    console.log('Files received:', req.files);
+
     const result = db.prepare(`
       INSERT INTO countries (
         name, slug, flag_image, banner_image, short_description, 
@@ -113,8 +116,13 @@ export const updateCountry = (req, res) => {
     }
 
     const slug = name ? createSlug(name) : country.slug;
-    const flagImage = req.files?.flag_image?.[0]?.filename || country.flag_image;
-    const bannerImage = req.files?.banner_image?.[0]?.filename || country.banner_image;
+    // Only update images if new files are provided
+    const flagImage = req.files?.flag_image?.[0]?.filename ? req.files.flag_image[0].filename : country.flag_image;
+    const bannerImage = req.files?.banner_image?.[0]?.filename ? req.files.banner_image[0].filename : country.banner_image;
+
+    console.log('Update country - ID:', id);
+    console.log('Flag image:', flagImage, 'Banner image:', bannerImage);
+    console.log('Files received:', req.files);
 
     db.prepare(`
       UPDATE countries SET
@@ -126,13 +134,13 @@ export const updateCountry = (req, res) => {
     `).run(
       name || country.name,
       slug,
-      flagImage,
-      bannerImage,
-      short_description || country.short_description,
-      description || country.description,
-      education_system || country.education_system,
-      cost_of_living || country.cost_of_living,
-      visa_info || country.visa_info,
+      flagImage || null,
+      bannerImage || null,
+      short_description !== undefined ? short_description : country.short_description,
+      description !== undefined ? description : country.description,
+      education_system !== undefined ? education_system : country.education_system,
+      cost_of_living !== undefined ? cost_of_living : country.cost_of_living,
+      visa_info !== undefined ? visa_info : country.visa_info,
       status || country.status,
       id
     );

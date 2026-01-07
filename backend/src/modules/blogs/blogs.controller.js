@@ -70,6 +70,9 @@ export const createBlog = (req, res) => {
     const slug = createSlug(title);
     const featuredImage = req.file?.filename || null;
 
+    console.log('Create blog - Featured image:', featuredImage);
+    console.log('File received:', req.file);
+
     const result = db.prepare(`
       INSERT INTO blogs (
         title, slug, featured_image, short_description, content,
@@ -112,7 +115,12 @@ export const updateBlog = (req, res) => {
     }
 
     const slug = title ? createSlug(title) : blog.slug;
-    const featuredImage = req.file?.filename || blog.featured_image;
+    // Only update featured_image if a new file is provided
+    const featuredImage = req.file?.filename ? req.file.filename : blog.featured_image;
+
+    console.log('Update blog - ID:', id);
+    console.log('Featured image:', featuredImage);
+    console.log('File received:', req.file);
 
     db.prepare(`
       UPDATE blogs SET
@@ -124,12 +132,12 @@ export const updateBlog = (req, res) => {
     `).run(
       title || blog.title,
       slug,
-      featuredImage,
-      short_description || blog.short_description,
-      content || blog.content,
-      category || blog.category,
-      meta_title || blog.meta_title,
-      meta_description || blog.meta_description,
+      featuredImage || null,
+      short_description !== undefined ? short_description : blog.short_description,
+      content !== undefined ? content : blog.content,
+      category !== undefined ? category : blog.category,
+      meta_title !== undefined ? meta_title : blog.meta_title,
+      meta_description !== undefined ? meta_description : blog.meta_description,
       status || blog.status,
       id
     );

@@ -83,6 +83,9 @@ export const createUniversity = (req, res) => {
     const slug = createSlug(name);
     const logo = req.file?.filename || null;
 
+    console.log('Create university - Logo:', logo);
+    console.log('File received:', req.file);
+
     const result = db.prepare(`
       INSERT INTO universities (
         country_id, name, slug, logo, location, website,
@@ -129,7 +132,12 @@ export const updateUniversity = (req, res) => {
     }
 
     const slug = name ? createSlug(name) : university.slug;
-    const logo = req.file?.filename || university.logo;
+    // Only update logo if a new file is provided
+    const logo = req.file?.filename ? req.file.filename : university.logo;
+
+    console.log('Update university - ID:', id);
+    console.log('Logo:', logo);
+    console.log('File received:', req.file);
 
     db.prepare(`
       UPDATE universities SET
@@ -142,14 +150,14 @@ export const updateUniversity = (req, res) => {
       country_id || university.country_id,
       name || university.name,
       slug,
-      logo,
-      location || university.location,
-      website || university.website,
-      programs_offered || university.programs_offered,
-      tuition_fees || university.tuition_fees,
-      entry_requirements || university.entry_requirements,
-      intake_details || university.intake_details,
-      scholarship_info || university.scholarship_info,
+      logo || null,
+      location !== undefined ? location : university.location,
+      website !== undefined ? website : university.website,
+      programs_offered !== undefined ? programs_offered : university.programs_offered,
+      tuition_fees !== undefined ? tuition_fees : university.tuition_fees,
+      entry_requirements !== undefined ? entry_requirements : university.entry_requirements,
+      intake_details !== undefined ? intake_details : university.intake_details,
+      scholarship_info !== undefined ? scholarship_info : university.scholarship_info,
       status || university.status,
       id
     );

@@ -30,17 +30,29 @@ const Home = () => {
   useEffect(() => {
     countriesAPI
       .getAll({ status: "active" })
-      .then((response) => setCountries(response.data.slice(0, 5)))
+      .then((response) => {
+        const data = response.data || response;
+        setCountries(Array.isArray(data) ? data.slice(0, 5) : []);
+        console.log('Countries loaded:', data);
+      })
       .catch((error) => console.error("Failed to fetch countries:", error));
 
     universitiesAPI
       .getAll({ status: "active" })
-      .then((response) => setUniversities(response.data.slice(0, 8)))
+      .then((response) => {
+        const data = response.data || response;
+        setUniversities(Array.isArray(data) ? data.slice(0, 8) : []);
+        console.log('Universities loaded:', data);
+      })
       .catch((error) => console.error("Failed to fetch universities:", error));
 
     blogsAPI
       .getAll({ status: "published" })
-      .then((response) => setBlogs(response.data.slice(0, 3)))
+      .then((response) => {
+        const data = response.data || response;
+        setBlogs(Array.isArray(data) ? data.slice(0, 3) : []);
+        console.log('Blogs loaded:', data);
+      })
       .catch((error) => console.error("Failed to fetch blogs:", error));
 
     settingsAPI
@@ -101,6 +113,10 @@ const Home = () => {
                     <img
                       src={`${BACKEND_URL}/uploads/countries/${country.flag_image}`}
                       alt={country.name}
+                      onError={(e) => {
+                        console.error('Failed to load image:', `${BACKEND_URL}/uploads/countries/${country.flag_image}`);
+                        e.target.style.display = 'none';
+                      }}
                     />
                   )}
                   <div className="country-overlay">
@@ -187,6 +203,10 @@ const Home = () => {
                     <img
                       src={`${BACKEND_URL}/uploads/universities/${university.logo}`}
                       alt={university.name}
+                      onError={(e) => {
+                        console.error('Failed to load image:', `${BACKEND_URL}/uploads/universities/${university.logo}`);
+                        e.target.style.display = 'none';
+                      }}
                     />
                   ) : (
                     <FaGlobe />

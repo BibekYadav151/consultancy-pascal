@@ -48,3 +48,17 @@ export const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: fileFilter
 });
+
+// Helper to handle optional file uploads
+export const optionalUpload = (fieldName) => {
+  return (req, res, next) => {
+    const uploadMiddleware = upload.single(fieldName);
+    uploadMiddleware(req, res, (err) => {
+      // Ignore 'no file' errors, but pass through other errors
+      if (err && err.code !== 'LIMIT_UNEXPECTED_FILE') {
+        return next(err);
+      }
+      next();
+    });
+  };
+};
