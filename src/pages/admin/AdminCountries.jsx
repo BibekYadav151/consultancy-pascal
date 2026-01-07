@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-import { BACKEND_URL, countriesAPI } from '../../services/api';
+import { BACKEND_URL, countriesAPI, getApiErrorMessage } from '../../services/api';
 import RichTextEditor from '../../components/admin/RichTextEditor';
 import './AdminCommon.css';
 
@@ -34,7 +35,9 @@ const AdminCountries = () => {
       const res = await countriesAPI.getAll(search ? { search } : undefined);
       setCountries(res.data);
     } catch (e) {
-      setError(e.response?.data?.error || 'Failed to load countries');
+      const message = getApiErrorMessage(e, 'Failed to load countries');
+      setError(message);
+      toast.error(message, { id: 'countries-load' });
     } finally {
       setLoading(false);
     }
@@ -120,10 +123,13 @@ const AdminCountries = () => {
       } else {
         await countriesAPI.create(fd);
       }
+      toast.success(editing ? 'Country updated successfully' : 'Country created successfully');
       await loadCountries();
       resetForm();
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to save country');
+      const message = getApiErrorMessage(err, 'Failed to save country');
+      setError(message);
+      toast.error(message, { id: 'countries-save' });
     } finally {
       setSaving(false);
     }
@@ -134,9 +140,12 @@ const AdminCountries = () => {
     setError('');
     try {
       await countriesAPI.delete(country.id);
+      toast.success('Country deleted successfully');
       await loadCountries();
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to delete country');
+      const message = getApiErrorMessage(err, 'Failed to delete country');
+      setError(message);
+      toast.error(message, { id: 'countries-delete' });
     }
   };
 

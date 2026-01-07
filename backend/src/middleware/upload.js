@@ -38,9 +38,11 @@ const fileFilter = (req, file, cb) => {
 
   if (mimetype && extname) {
     return cb(null, true);
-  } else {
-    cb(new Error('Only image files are allowed (jpeg, jpg, png, gif, webp)'));
   }
+
+  const err = new Error('Only image files are allowed (jpeg, jpg, png, gif, webp)');
+  err.statusCode = 400;
+  cb(err);
 };
 
 export const upload = multer({

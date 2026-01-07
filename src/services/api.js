@@ -5,18 +5,41 @@ export const BACKEND_URL = API_URL.replace(/\/api\/?$/, '');
 
 const api = axios.create({
   baseURL: API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
 });
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
+  config.headers = config.headers || {};
+
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+
+  // Let the browser set Content-Type (including boundary) for multipart/form-data
+  if (typeof FormData !== 'undefined' && config.data instanceof FormData) {
+    if (typeof config.headers.delete === 'function') {
+      config.headers.delete('Content-Type');
+    } else {
+      delete config.headers['Content-Type'];
+      delete config.headers['content-type'];
+    }
+  } else {
+    if (!config.headers['Content-Type'] && !config.headers['content-type']) {
+      config.headers['Content-Type'] = 'application/json';
+    }
+  }
+
   return config;
 });
+
+export const getApiErrorMessage = (err, fallback = 'Something went wrong') => {
+  return (
+    err?.response?.data?.error?.message ||
+    err?.response?.data?.error ||
+    err?.message ||
+    fallback
+  );
+};
 
 export const authAPI = {
   login: (credentials) => api.post('/auth/login', credentials),

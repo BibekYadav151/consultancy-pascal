@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-import { BACKEND_URL, countriesAPI, universitiesAPI } from '../../services/api';
+import { BACKEND_URL, countriesAPI, getApiErrorMessage, universitiesAPI } from '../../services/api';
 import RichTextEditor from '../../components/admin/RichTextEditor';
 import './AdminCommon.css';
 
@@ -42,7 +43,9 @@ const AdminUniversities = () => {
       setCountries(cRes.data);
       setUniversities(uRes.data);
     } catch (e) {
-      setError(e.response?.data?.error || 'Failed to load universities');
+      const message = getApiErrorMessage(e, 'Failed to load universities');
+      setError(message);
+      toast.error(message, { id: 'universities-load' });
     } finally {
       setLoading(false);
     }
@@ -131,10 +134,13 @@ const AdminUniversities = () => {
       } else {
         await universitiesAPI.create(fd);
       }
+      toast.success(editing ? 'University updated successfully' : 'University created successfully');
       await load();
       resetForm();
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to save university');
+      const message = getApiErrorMessage(err, 'Failed to save university');
+      setError(message);
+      toast.error(message, { id: 'universities-save' });
     } finally {
       setSaving(false);
     }
@@ -145,9 +151,12 @@ const AdminUniversities = () => {
     setError('');
     try {
       await universitiesAPI.delete(uni.id);
+      toast.success('University deleted successfully');
       await load();
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to delete university');
+      const message = getApiErrorMessage(err, 'Failed to delete university');
+      setError(message);
+      toast.error(message, { id: 'universities-delete' });
     }
   };
 

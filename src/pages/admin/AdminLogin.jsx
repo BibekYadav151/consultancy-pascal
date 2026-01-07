@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { getApiErrorMessage } from '../../services/api';
 import './AdminLogin.css';
 
 const AdminLogin = () => {
@@ -23,9 +25,12 @@ const AdminLogin = () => {
 
     try {
       await login(credentials);
+      toast.success('Logged in successfully');
       navigate('/admin/dashboard');
     } catch (err) {
-      setError(err.response?.data?.error || 'Login failed. Please check your credentials.');
+      const message = getApiErrorMessage(err, 'Login failed. Please check your credentials.');
+      setError(message);
+      toast.error(message, { id: 'login-error' });
     } finally {
       setSubmitting(false);
     }

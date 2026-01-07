@@ -58,10 +58,17 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
   setHeaders: (res, filePath) => {
     // Set proper headers for images
-    if (filePath.endsWith('.jpg') || filePath.endsWith('.jpeg') || 
-        filePath.endsWith('.png') || filePath.endsWith('.gif') || 
-        filePath.endsWith('.webp')) {
-      res.setHeader('Content-Type', 'image/' + filePath.split('.').pop());
+    const ext = path.extname(filePath).toLowerCase();
+    const mimeMap = {
+      '.jpg': 'jpeg',
+      '.jpeg': 'jpeg',
+      '.png': 'png',
+      '.gif': 'gif',
+      '.webp': 'webp'
+    };
+
+    if (mimeMap[ext]) {
+      res.setHeader('Content-Type', `image/${mimeMap[ext]}`);
       res.setHeader('Cache-Control', 'public, max-age=31536000');
     }
   }

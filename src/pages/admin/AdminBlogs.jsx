@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-import { BACKEND_URL, blogsAPI } from '../../services/api';
+import { BACKEND_URL, blogsAPI, getApiErrorMessage } from '../../services/api';
 import RichTextEditor from '../../components/admin/RichTextEditor';
 import './AdminCommon.css';
 
@@ -33,7 +34,9 @@ const AdminBlogs = () => {
       const res = await blogsAPI.getAll(search ? { search } : undefined);
       setBlogs(res.data);
     } catch (e) {
-      setError(e.response?.data?.error || 'Failed to load blogs');
+      const message = getApiErrorMessage(e, 'Failed to load blogs');
+      setError(message);
+      toast.error(message, { id: 'blogs-load' });
     } finally {
       setLoading(false);
     }
@@ -116,10 +119,13 @@ const AdminBlogs = () => {
       } else {
         await blogsAPI.create(fd);
       }
+      toast.success(editing ? 'Blog updated successfully' : 'Blog created successfully');
       await loadBlogs();
       resetForm();
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to save blog');
+      const message = getApiErrorMessage(err, 'Failed to save blog');
+      setError(message);
+      toast.error(message, { id: 'blogs-save' });
     } finally {
       setSaving(false);
     }
@@ -130,9 +136,12 @@ const AdminBlogs = () => {
     setError('');
     try {
       await blogsAPI.delete(blog.id);
+      toast.success('Blog deleted successfully');
       await loadBlogs();
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to delete blog');
+      const message = getApiErrorMessage(err, 'Failed to delete blog');
+      setError(message);
+      toast.error(message, { id: 'blogs-delete' });
     }
   };
 
