@@ -212,7 +212,7 @@ const Home = () => {
                 <h4>{university.name}</h4>
                 <p>{university.location}</p>
                 <Link to="/universities" className="uni-link">
-                  Apply Now
+                  See More
                 </Link>
               </div>
             ))}
