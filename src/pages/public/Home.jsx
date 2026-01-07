@@ -85,9 +85,6 @@ const Home = () => {
             </p>
             <div className="hero-buttons">
               <Link to="/contact" className="btn btn-primary">
-                Apply Now
-              </Link>
-              <Link to="/contact" className="btn btn-secondary">
                 Free Consultation
               </Link>
             </div>
