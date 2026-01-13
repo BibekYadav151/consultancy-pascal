@@ -1,12 +1,11 @@
 import React from 'react';
-import './RichTextContent.css';
 
 const htmlTagRegex = /<\/?[a-z][\s\S]*>/i;
 
 const RichTextContent = ({ html, className }) => {
   if (!html) return null;
 
-  const classes = ['rich-text-content', className].filter(Boolean).join(' ');
+  const classes = ['prose prose-sm md:prose-base max-w-none text-gray-600 leading-relaxed', className].filter(Boolean).join(' ');
   const looksLikeHtml = htmlTagRegex.test(html);
 
   if (!looksLikeHtml) {
@@ -17,7 +16,17 @@ const RichTextContent = ({ html, className }) => {
     );
   }
 
-  return <div className={classes} dangerouslySetInnerHTML={{ __html: html }} />;
+  return (
+    <div 
+      className={classes} 
+      dangerouslySetInnerHTML={{ __html: html }} 
+      style={{
+        // Fallback for lists and basic styles if tailwind-typography is not available
+        listStyleType: 'initial',
+        paddingLeft: 'initial',
+      }}
+    />
+  );
 };
 
 export default RichTextContent;

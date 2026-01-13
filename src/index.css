@@ -1,61 +1,33 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --pascal-orange: #FF8C00;
+    --pascal-blue: #0047AB;
+  }
+
+  body {
+    @apply antialiased text-gray-900 bg-white;
+    font-family: 'Circular', -apple-system, 'BlinkMacSystemFont', 'Roboto', 'Helvetica Neue', sans-serif;
+  }
 }
 
-:root {
-  /* Brand Colors */
-  --primary-color: #F5C400; /* Signature Yellow */
-  --primary-dark: #E0B200; /* Dark Yellow for hover */
+@layer components {
+  .btn-pascal {
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-200 inline-block text-center cursor-pointer;
+  }
+  
+  .btn-pascal-orange {
+    @apply btn-pascal bg-pascal-orange text-white hover:bg-orange-600;
+  }
+  
+  .btn-pascal-blue {
+    @apply btn-pascal bg-pascal-blue text-white hover:bg-blue-800;
+  }
 
-  /* Background Colors */
-  --bg-main: #FAFAFA; /* Soft White - Main background */
-  --bg-white: #FFFFFF; /* Pure White - Section background */
-  --bg-light: #F3F4F6; /* Light Grey - Alternate section */
-
-  /* Text Colors */
-  --text-primary: #1F2937; /* Dark Grey - Primary text */
-  --text-secondary: #4B5563; /* Medium Grey - Secondary text */
-  --text-muted: #6B7280; /* Light Grey - Muted text */
-  --text-white: #FFFFFF; /* White - For dark backgrounds/overlays */
-
-  /* Border & UI */
-  --border-color: #E5E7EB;
-  --border-light: #E5E7EB;
-  --secondary-color: #E5E7EB;
-
-  /* Shadows */
-  --shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-
-  /* Typography */
-  --font-heading: 'Poppins', sans-serif;
-  --font-body: 'Inter', sans-serif;
-}
-
-body {
-  font-family: var(--font-body);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: var(--text-primary);
-  background-color: var(--bg-main);
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-#root {
-  min-height: 100vh;
+  .btn-pascal-outline {
+    @apply btn-pascal border-2 border-pascal-blue text-pascal-blue hover:bg-pascal-blue hover:text-white;
+  }
 }
