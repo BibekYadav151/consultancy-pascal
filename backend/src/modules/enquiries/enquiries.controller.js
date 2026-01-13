@@ -2,36 +2,26 @@ import db from '../../config/database.js';
 
 export const getAllEnquiries = (req, res) => {
   try {
-    const { status, country_id, start_date, end_date } = req.query;
-    let query = `
-      SELECT e.*, c.name as country_name 
-      FROM enquiries e 
-      LEFT JOIN countries c ON e.country_id = c.id 
-      WHERE 1=1
-    `;
+    const { status, start_date, end_date } = req.query;
+    let query = 'SELECT * FROM enquiries WHERE 1=1';
     const params = [];
 
     if (status) {
-      query += ' AND e.status = ?';
+      query += ' AND status = ?';
       params.push(status);
     }
 
-    if (country_id) {
-      query += ' AND e.country_id = ?';
-      params.push(country_id);
-    }
-
     if (start_date) {
-      query += ' AND DATE(e.created_at) >= DATE(?)';
+      query += ' AND DATE(created_at) >= DATE(?)';
       params.push(start_date);
     }
 
     if (end_date) {
-      query += ' AND DATE(e.created_at) <= DATE(?)';
+      query += ' AND DATE(created_at) <= DATE(?)';
       params.push(end_date);
     }
 
-    query += ' ORDER BY e.created_at DESC';
+    query += ' ORDER BY created_at DESC';
 
     const enquiries = db.prepare(query).all(...params);
     res.json(enquiries);
@@ -44,12 +34,7 @@ export const getAllEnquiries = (req, res) => {
 export const getEnquiryById = (req, res) => {
   try {
     const { id } = req.params;
-    const enquiry = db.prepare(`
-      SELECT e.*, c.name as country_name 
-      FROM enquiries e 
-      LEFT JOIN countries c ON e.country_id = c.id 
-      WHERE e.id = ?
-    `).get(id);
+    const enquiry = db.prepare('SELECT * FROM enquiries WHERE id = ?').get(id);
 
     if (!enquiry) {
       return res.status(404).json({ error: 'Enquiry not found' });
@@ -64,16 +49,16 @@ export const getEnquiryById = (req, res) => {
 
 export const createEnquiry = (req, res) => {
   try {
-    const { name, email, phone, country_id, message } = req.body;
+    const { name, email, phone, subject, message } = req.body;
 
     if (!name || !email || !message) {
       return res.status(400).json({ error: 'Name, email, and message are required' });
     }
 
     const result = db.prepare(`
-      INSERT INTO enquiries (name, email, phone, country_id, message)
+      INSERT INTO enquiries (name, email, phone, subject, message)
       VALUES (?, ?, ?, ?, ?)
-    `).run(name, email, phone, country_id, message);
+    `).run(name, email, phone, subject || '', message);
 
     const enquiry = db.prepare('SELECT * FROM enquiries WHERE id = ?').get(result.lastInsertRowid);
     res.status(201).json(enquiry);

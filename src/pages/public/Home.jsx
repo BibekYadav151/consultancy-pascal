@@ -2,44 +2,36 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   FaGraduationCap,
-  FaPassport,
+  FaBook,
   FaUserTie,
   FaPhone,
   FaWhatsapp,
   FaQuoteLeft,
-  FaGlobe,
+  FaCertificate,
   FaCheckCircle,
-  FaSearch,
-  FaMapMarkerAlt,
+  FaAward,
+  FaUsers,
   FaClock,
-  FaUniversity
+  FaChalkboardTeacher
 } from "react-icons/fa";
-import {
-  BACKEND_URL,
-  countriesAPI,
-  universitiesAPI,
-  blogsAPI,
-  settingsAPI,
-} from "../../services/api";
+import { settingsAPI } from "../../services/api";
+import axios from "axios";
+
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
 const Home = () => {
-  const [countries, setCountries] = useState([]);
-  const [universities, setUniversities] = useState([]);
-  const [blogs, setBlogs] = useState([]);
+  const [classes, setClasses] = useState([]);
+  const [programs, setPrograms] = useState([]);
   const [settings, setSettings] = useState({});
 
   useEffect(() => {
-    countriesAPI.getAll({ status: "active" })
-      .then((response) => setCountries(response.data?.slice(0, 4) || []))
-      .catch((error) => console.error("Failed to fetch countries:", error));
+    axios.get(`${API_URL}/classes?status=active`)
+      .then((response) => response.data.success && setClasses(response.data.data.slice(0, 3)))
+      .catch((error) => console.error("Failed to fetch classes:", error));
 
-    universitiesAPI.getAll({ status: "active" })
-      .then((response) => setUniversities(response.data?.slice(0, 4) || []))
-      .catch((error) => console.error("Failed to fetch universities:", error));
-
-    blogsAPI.getAll({ status: "published" })
-      .then((response) => setBlogs(response.data?.slice(0, 3) || []))
-      .catch((error) => console.error("Failed to fetch blogs:", error));
+    axios.get(`${API_URL}/programs?status=active`)
+      .then((response) => response.data.success && setPrograms(response.data.data.slice(0, 3)))
+      .catch((error) => console.error("Failed to fetch programs:", error));
 
     settingsAPI.getAll()
       .then((response) => setSettings(response.data))
@@ -64,19 +56,19 @@ const Home = () => {
         <div className="container mx-auto px-4 md:px-8 relative z-10 text-white">
           <div className="max-w-3xl">
             <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-6">
-              Your Journey to <br />
-              <span className="text-pascal-orange text-shadow">Global Success</span>
+              Unlock Your <br />
+              <span className="text-orange-500 text-shadow">Learning Potential</span>
             </h1>
             <p className="text-xl md:text-2xl text-blue-50 mb-10 leading-relaxed font-light">
-              Pascal Education Consultancy provides expert guidance for students aspiring to study abroad. 
-              From visa assistance to test preparation, we are your trusted partner.
+              Discover world-class education programs and expert-led classes designed to help you 
+              achieve your academic and professional goals.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link to="/universities" className="btn-pascal-orange px-8 py-4 text-lg">
+              <Link to="/programs" className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 text-lg rounded-lg font-semibold transition">
                 Explore Programs
               </Link>
-              <Link to="/contact" className="btn-pascal-outline bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white hover:text-pascal-blue px-8 py-4 text-lg">
-                Free Consultation
+              <Link to="/classes" className="bg-white/10 backdrop-blur-sm border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 text-lg rounded-lg font-semibold transition">
+                Browse Classes
               </Link>
             </div>
           </div>
@@ -100,25 +92,25 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Features Section */}
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-4 md:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Premium Services</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Choose Us</h2>
             <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-              We offer comprehensive support for every step of your international education journey.
+              We provide exceptional educational experiences designed to transform your future.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: <FaGraduationCap />, title: "University Admissions", desc: "Expert guidance in choosing the right institution and securing your spot." },
-              { icon: <FaPassport />, title: "Visa Assistance", desc: "Seamless visa processing with high success rates for various countries." },
-              { icon: <FaUserTie />, title: "Test Preparation", desc: "Top-notch coaching for IELTS, PTE, and other language proficiency tests." },
-              { icon: <FaGlobe />, title: "Global Mobility", desc: "Comprehensive support for relocation and settling in your new country." }
+              { icon: <FaChalkboardTeacher />, title: "Expert Instructors", desc: "Learn from industry professionals with years of real-world experience." },
+              { icon: <FaCertificate />, title: "Certified Programs", desc: "Earn recognized certifications that boost your career prospects." },
+              { icon: <FaUsers />, title: "Interactive Learning", desc: "Engage in hands-on projects and collaborative learning experiences." },
+              { icon: <FaAward />, title: "Proven Success", desc: "Join thousands of successful graduates who achieved their goals with us." }
             ].map((s, i) => (
               <div key={i} className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all group">
-                <div className="w-16 h-16 bg-blue-50 text-pascal-blue rounded-xl flex items-center justify-center text-3xl mb-6 group-hover:bg-pascal-blue group-hover:text-white transition-colors">
+                <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-3xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                   {s.icon}
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-gray-900">{s.title}</h3>
@@ -147,27 +139,27 @@ const Home = () => {
               </div>
             </div>
             <div className="lg:w-1/2">
-              <h2 className="text-pascal-blue font-bold uppercase tracking-[0.2em] text-sm mb-4">About Pascal Consultancy</h2>
+              <h2 className="text-blue-600 font-bold uppercase tracking-[0.2em] text-sm mb-4">About Us</h2>
               <h3 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 leading-tight">
-                Empowering Students to Achieve Their Dreams
+                Transform Your Future Through Education
               </h3>
               <p className="text-gray-600 text-lg mb-8 leading-relaxed">
-                At Pascal Education Consultancy, we believe that education has no boundaries. Our mission is to provide students with the best opportunities to learn and grow in an international environment.
+                We are dedicated to providing high-quality education and training programs that empower individuals to achieve their career aspirations and personal growth.
               </p>
               <ul className="space-y-4 mb-10">
                 {[
-                  "Personalized counseling for every student",
-                  "Direct partnerships with world-class universities",
-                  "Expert trainers for language proficiency tests",
-                  "High visa success rate across all destinations"
+                  "Personalized learning paths for every student",
+                  "Industry-recognized certifications and programs",
+                  "Expert instructors with real-world experience",
+                  "Flexible learning options to fit your schedule"
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-4 text-gray-700 font-medium">
-                    <FaCheckCircle className="text-pascal-orange text-xl flex-shrink-0" />
+                    <FaCheckCircle className="text-orange-500 text-xl flex-shrink-0" />
                     {item}
                   </li>
                 ))}
               </ul>
-              <Link to="/about" className="btn-pascal-blue inline-flex items-center gap-2">
+              <Link to="/about" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold inline-flex items-center gap-2 transition">
                 Learn More About Us <span className="text-xl">→</span>
               </Link>
             </div>
@@ -175,42 +167,52 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Featured Destinations */}
-      <section className="py-24 bg-pascal-blue text-white">
+      {/* Featured Classes */}
+      <section className="py-24 bg-blue-600 text-white">
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16">
             <div>
-              <h2 className="text-4xl font-bold mb-4">Study Destinations</h2>
+              <h2 className="text-4xl font-bold mb-4">Popular Classes</h2>
               <p className="text-blue-100 text-lg max-w-xl">
-                Choose from the world's most popular study destinations and start your international career.
+                Choose from our expertly designed classes and start your learning journey today.
               </p>
             </div>
-            <Link to="/destinations" className="text-white border-b-2 border-pascal-orange pb-1 font-bold hover:text-pascal-orange transition-colors hidden md:block">
-              View All Destinations
+            <Link to="/classes" className="text-white border-b-2 border-orange-500 pb-1 font-bold hover:text-orange-500 transition-colors hidden md:block">
+              View All Classes
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {countries.map((country) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {classes.map((classItem) => (
               <Link
-                to={`/destinations/${country.slug}`}
-                key={country.id}
-                className="group relative h-80 rounded-3xl overflow-hidden shadow-lg"
+                to={`/classes/${classItem.slug}`}
+                key={classItem.id}
+                className="group bg-white text-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all"
               >
-                {country.flag_image ? (
-                  <img
-                    src={`${BACKEND_URL}/uploads/countries/${country.flag_image}`}
-                    alt={country.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-blue-900/50"></div>
+                {classItem.image && (
+                  <div className="h-48 overflow-hidden">
+                    <img
+                      src={`http://localhost:3000${classItem.image}`}
+                      alt={classItem.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
-                  <h3 className="text-2xl font-bold mb-2">{country.name}</h3>
-                  <span className="text-pascal-orange font-semibold opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 transition-transform">
-                    View Details →
-                  </span>
+                <div className="p-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    {classItem.level && (
+                      <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">
+                        {classItem.level}
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">{classItem.title}</h3>
+                  {classItem.short_description && (
+                    <p className="text-gray-600 mb-4">{classItem.short_description}</p>
+                  )}
+                  {classItem.price && (
+                    <div className="text-orange-500 font-bold text-lg">{classItem.price}</div>
+                  )}
                 </div>
               </Link>
             ))}

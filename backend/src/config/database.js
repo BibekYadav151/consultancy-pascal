@@ -28,52 +28,36 @@ const initDatabase = async () => {
       updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 
-    CREATE TABLE IF NOT EXISTS countries (
+    CREATE TABLE IF NOT EXISTS classes (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL,
+      title TEXT NOT NULL,
       slug TEXT UNIQUE NOT NULL,
-      flag_image TEXT,
-      banner_image TEXT,
+      image TEXT,
       short_description TEXT,
       description TEXT,
-      education_system TEXT,
-      cost_of_living TEXT,
-      visa_info TEXT,
+      duration TEXT,
+      level TEXT,
+      instructor TEXT,
+      price TEXT,
+      schedule TEXT,
       status TEXT DEFAULT 'active',
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 
-    CREATE TABLE IF NOT EXISTS universities (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      country_id INTEGER NOT NULL,
-      name TEXT NOT NULL,
-      slug TEXT UNIQUE NOT NULL,
-      logo TEXT,
-      location TEXT,
-      website TEXT,
-      programs_offered TEXT,
-      tuition_fees TEXT,
-      entry_requirements TEXT,
-      intake_details TEXT,
-      scholarship_info TEXT,
-      status TEXT DEFAULT 'active',
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      FOREIGN KEY (country_id) REFERENCES countries(id) ON DELETE CASCADE
-    );
-
-    CREATE TABLE IF NOT EXISTS blogs (
+    CREATE TABLE IF NOT EXISTS programs (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       title TEXT NOT NULL,
       slug TEXT UNIQUE NOT NULL,
-      featured_image TEXT,
+      image TEXT,
       short_description TEXT,
-      content TEXT,
+      description TEXT,
+      duration TEXT,
       category TEXT,
-      meta_title TEXT,
-      meta_description TEXT,
-      status TEXT DEFAULT 'draft',
+      eligibility TEXT,
+      fee_structure TEXT,
+      features TEXT,
+      status TEXT DEFAULT 'active',
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
@@ -83,12 +67,11 @@ const initDatabase = async () => {
       name TEXT NOT NULL,
       email TEXT NOT NULL,
       phone TEXT,
-      country_id INTEGER,
+      subject TEXT,
       message TEXT,
       status TEXT DEFAULT 'new',
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      FOREIGN KEY (country_id) REFERENCES countries(id) ON DELETE SET NULL
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 
     CREATE TABLE IF NOT EXISTS settings (
@@ -99,13 +82,10 @@ const initDatabase = async () => {
       updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 
-    CREATE INDEX IF NOT EXISTS idx_countries_slug ON countries(slug);
-    CREATE INDEX IF NOT EXISTS idx_countries_status ON countries(status);
-    CREATE INDEX IF NOT EXISTS idx_universities_slug ON universities(slug);
-    CREATE INDEX IF NOT EXISTS idx_universities_country ON universities(country_id);
-    CREATE INDEX IF NOT EXISTS idx_universities_status ON universities(status);
-    CREATE INDEX IF NOT EXISTS idx_blogs_slug ON blogs(slug);
-    CREATE INDEX IF NOT EXISTS idx_blogs_status ON blogs(status);
+    CREATE INDEX IF NOT EXISTS idx_classes_slug ON classes(slug);
+    CREATE INDEX IF NOT EXISTS idx_classes_status ON classes(status);
+    CREATE INDEX IF NOT EXISTS idx_programs_slug ON programs(slug);
+    CREATE INDEX IF NOT EXISTS idx_programs_status ON programs(status);
     CREATE INDEX IF NOT EXISTS idx_enquiries_status ON enquiries(status);
   `);
 
@@ -117,23 +97,23 @@ const initDatabase = async () => {
     db.prepare(`
       INSERT INTO admins (email, password, name, role) 
       VALUES (?, ?, ?, ?)
-    `).run('admin@pascal.edu.np', hashedPassword, 'Pascal Admin', 'admin');
-    console.log('✅ Default admin created: admin@pascal.edu.np / admin123');
+    `).run('admin@education.com', hashedPassword, 'Admin User', 'admin');
+    console.log('✅ Default admin created: admin@education.com / admin123');
   }
 
   const settingsCount = db.prepare('SELECT COUNT(*) as count FROM settings').get();
   if (settingsCount.count === 0) {
     const defaultSettings = [
-      { key: 'site_name', value: 'Pascal Education Consultancy' },
-      { key: 'contact_email', value: 'info@pascal.edu.np' },
-      { key: 'contact_phone', value: '+977-1-4412345' },
-      { key: 'contact_address', value: 'Putalisadak, Kathmandu, Nepal' },
-      { key: 'whatsapp_number', value: '+9779801234567' },
-      { key: 'facebook_url', value: 'https://facebook.com/pascalconsultancy' },
-      { key: 'twitter_url', value: 'https://twitter.com/pascaledu' },
-      { key: 'instagram_url', value: 'https://instagram.com/pascaleducation' },
-      { key: 'linkedin_url', value: 'https://linkedin.com/company/pascaleducation' },
-      { key: 'office_hours', value: 'Sun-Fri: 10:00 AM - 6:00 PM' }
+      { key: 'site_name', value: 'Education Platform' },
+      { key: 'contact_email', value: 'info@education.com' },
+      { key: 'contact_phone', value: '+1-234-567-8900' },
+      { key: 'contact_address', value: '123 Education Street, City, Country' },
+      { key: 'whatsapp_number', value: '+1234567890' },
+      { key: 'facebook_url', value: 'https://facebook.com/education' },
+      { key: 'twitter_url', value: 'https://twitter.com/education' },
+      { key: 'instagram_url', value: 'https://instagram.com/education' },
+      { key: 'linkedin_url', value: 'https://linkedin.com/company/education' },
+      { key: 'office_hours', value: 'Mon-Fri: 9:00 AM - 5:00 PM' }
     ];
     
     const insertSetting = db.prepare('INSERT INTO settings (key, value) VALUES (?, ?)');

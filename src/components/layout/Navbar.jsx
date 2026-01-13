@@ -27,9 +27,8 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
-    { name: 'Programs', path: '/universities' },
-    { name: 'Destinations', path: '/destinations' },
-    { name: 'Blog', path: '/blog' },
+    { name: 'Classes', path: '/classes' },
+    { name: 'Programs', path: '/programs' },
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -39,11 +38,11 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
             <div className="flex flex-col">
-              <span className={`text-2xl font-bold tracking-tight ${isScrolled ? 'text-pascal-blue' : 'text-pascal-blue'}`}>
-                <span className="text-pascal-orange">Pascal</span> Education
+              <span className={`text-2xl font-bold tracking-tight ${isScrolled ? 'text-blue-600' : 'text-blue-600'}`}>
+                <span className="text-orange-500">Edu</span>Platform
               </span>
               <span className={`text-[10px] uppercase tracking-[0.2em] font-medium ${isScrolled ? 'text-gray-500' : 'text-gray-600'}`}>
-                Consultancy
+                Learn & Grow
               </span>
             </div>
           </Link>
