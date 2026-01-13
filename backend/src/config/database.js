@@ -117,23 +117,23 @@ const initDatabase = async () => {
     db.prepare(`
       INSERT INTO admins (email, password, name, role) 
       VALUES (?, ?, ?, ?)
-    `).run('admin@consultancy.com', hashedPassword, 'BIG Admin', 'admin');
-    console.log('✅ Default admin created: admin@consultancy.com / admin123');
+    `).run('admin@pascal.edu.np', hashedPassword, 'Pascal Admin', 'admin');
+    console.log('✅ Default admin created: admin@pascal.edu.np / admin123');
   }
 
   const settingsCount = db.prepare('SELECT COUNT(*) as count FROM settings').get();
   if (settingsCount.count === 0) {
     const defaultSettings = [
-      { key: 'site_name', value: 'BIG Partnership' },
-      { key: 'contact_email', value: 'admissions@bigpartnership.com' },
-      { key: 'contact_phone', value: '+44 20 1234 5678' },
-      { key: 'contact_address', value: 'Global Education Hub, London, UK' },
-      { key: 'whatsapp_number', value: '+447000000000' },
-      { key: 'facebook_url', value: 'https://facebook.com/bigpartnership' },
-      { key: 'twitter_url', value: 'https://twitter.com/bigpartnership' },
-      { key: 'instagram_url', value: 'https://instagram.com/bigpartnership' },
-      { key: 'linkedin_url', value: 'https://linkedin.com/company/bigpartnership' },
-      { key: 'office_hours', value: 'Mon-Sat: 10:00 AM - 7:00 PM' }
+      { key: 'site_name', value: 'Pascal Education Consultancy' },
+      { key: 'contact_email', value: 'info@pascal.edu.np' },
+      { key: 'contact_phone', value: '+977-1-4412345' },
+      { key: 'contact_address', value: 'Putalisadak, Kathmandu, Nepal' },
+      { key: 'whatsapp_number', value: '+9779801234567' },
+      { key: 'facebook_url', value: 'https://facebook.com/pascalconsultancy' },
+      { key: 'twitter_url', value: 'https://twitter.com/pascaledu' },
+      { key: 'instagram_url', value: 'https://instagram.com/pascaleducation' },
+      { key: 'linkedin_url', value: 'https://linkedin.com/company/pascaleducation' },
+      { key: 'office_hours', value: 'Sun-Fri: 10:00 AM - 6:00 PM' }
     ];
     
     const insertSetting = db.prepare('INSERT INTO settings (key, value) VALUES (?, ?)');

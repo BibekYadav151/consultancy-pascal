@@ -13,6 +13,7 @@ import PublicLayout from "./components/layout/PublicLayout";
 import Home from "./pages/public/Home";
 import About from "./pages/public/About";
 import AboutWisdom from "./pages/public/AboutWisdom";
+import Classes from "./pages/public/Classes";
 import Destinations, { CountryDetail } from "./pages/public/Destinations";
 import Universities, { UniversityDetail } from "./pages/public/Universities";
 import Blog, { BlogDetail } from "./pages/public/Blog";
@@ -26,8 +27,6 @@ import AdminUniversities from "./pages/admin/AdminUniversities";
 import AdminBlogs from "./pages/admin/AdminBlogs";
 import AdminEnquiries from "./pages/admin/AdminEnquiries";
 import AdminSettings from "./pages/admin/AdminSettings";
-
-import "./App.css";
 
 function App() {
   return (
@@ -53,6 +52,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
             <Route path="aboutwisdom" element={<AboutWisdom />} />
+            <Route path="classes" element={<Classes />} />
             <Route path="destinations" element={<Destinations />} />
             <Route path="destinations/:slug" element={<CountryDetail />} />
             <Route path="universities" element={<Universities />} />
