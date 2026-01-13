@@ -66,7 +66,6 @@ const Footer = () => {
             <ul className="flex flex-col gap-4">
               <li><Link to="/" className="text-blue-100 hover:text-pascal-orange transition-colors">Home</Link></li>
               <li><Link to="/about" className="text-blue-100 hover:text-pascal-orange transition-colors">About Us</Link></li>
-              <li><Link to="/classes" className="text-blue-100 hover:text-pascal-orange transition-colors">Our Classes</Link></li>
               <li><Link to="/universities" className="text-blue-100 hover:text-pascal-orange transition-colors">Programs</Link></li>
               <li><Link to="/destinations" className="text-blue-100 hover:text-pascal-orange transition-colors">Destinations</Link></li>
               <li><Link to="/blog" className="text-blue-100 hover:text-pascal-orange transition-colors">Blog</Link></li>
@@ -119,7 +118,7 @@ const Footer = () => {
           <p>
             Developed by{" "}
             <a href="#" className="text-pascal-orange font-bold hover:underline">
-              Wisdom Technologies
+              Pascal Technologies
             </a>
           </p>
         </div>
