@@ -12,8 +12,6 @@ import PublicLayout from "./components/layout/PublicLayout";
 
 import Home from "./pages/public/Home";
 import About from "./pages/public/About";
-import AboutWisdom from "./pages/public/AboutWisdom";
-import Classes from "./pages/public/Classes";
 import Destinations, { CountryDetail } from "./pages/public/Destinations";
 import Universities, { UniversityDetail } from "./pages/public/Universities";
 import Blog, { BlogDetail } from "./pages/public/Blog";
@@ -51,8 +49,6 @@ function App() {
           <Route path="/" element={<PublicLayout />}>
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
-            <Route path="aboutwisdom" element={<AboutWisdom />} />
-            <Route path="classes" element={<Classes />} />
             <Route path="destinations" element={<Destinations />} />
             <Route path="destinations/:slug" element={<CountryDetail />} />
             <Route path="universities" element={<Universities />} />
