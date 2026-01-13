@@ -32,16 +32,28 @@ const Navbar = () => {
     { name: 'Contact', path: '/contact' },
   ];
 
+  const isHomePage = location.pathname === '/';
+
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${
+      isScrolled 
+        ? 'bg-white/95 backdrop-blur-md shadow-lg py-2' 
+        : isHomePage 
+          ? 'bg-transparent py-4' 
+          : 'bg-white shadow-md py-4'
+    }`}>
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
             <div className="flex flex-col">
-              <span className={`text-2xl font-bold tracking-tight ${isScrolled ? 'text-blue-600' : 'text-blue-600'}`}>
-                <span className="text-orange-500">Edu</span>Platform
+              <span className={`text-2xl font-bold tracking-tight transition-colors ${
+                isScrolled || !isHomePage ? 'text-blue-600' : 'text-white'
+              }`}>
+                <span className={isScrolled || !isHomePage ? 'text-orange-500' : 'text-cyan-400'}>Edu</span>Platform
               </span>
-              <span className={`text-[10px] uppercase tracking-[0.2em] font-medium ${isScrolled ? 'text-gray-500' : 'text-gray-600'}`}>
+              <span className={`text-[10px] uppercase tracking-[0.2em] font-medium transition-colors ${
+                isScrolled || !isHomePage ? 'text-gray-500' : 'text-slate-300'
+              }`}>
                 Learn & Grow
               </span>
             </div>
@@ -53,8 +65,10 @@ const Navbar = () => {
               <li key={link.path}>
                 <Link 
                   to={link.path} 
-                  className={`text-sm font-semibold transition-colors duration-200 hover:text-pascal-orange ${
-                    isActive(link.path) ? 'text-pascal-orange' : 'text-gray-700'
+                  className={`text-sm font-semibold transition-colors duration-200 ${
+                    isActive(link.path) 
+                      ? (isScrolled || !isHomePage ? 'text-orange-500' : 'text-cyan-400') 
+                      : (isScrolled || !isHomePage ? 'text-gray-700 hover:text-orange-500' : 'text-white/90 hover:text-white')
                   }`}
                 >
                   {link.name}
@@ -64,14 +78,23 @@ const Navbar = () => {
           </ul>
 
           <div className="hidden lg:block">
-            <Link to="/contact" className="btn-pascal-orange text-sm">
+            <Link 
+              to="/contact" 
+              className={`text-sm px-6 py-3 rounded-full font-semibold transition-all duration-300 inline-block ${
+                isScrolled || !isHomePage
+                  ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:shadow-lg hover:scale-105'
+                  : 'bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-blue-600'
+              }`}
+            >
               Apply Now
             </Link>
           </div>
 
           {/* Mobile Toggle */}
           <button 
-            className="lg:hidden text-2xl text-pascal-blue focus:outline-none"
+            className={`lg:hidden text-2xl focus:outline-none transition-colors ${
+              isScrolled || !isHomePage ? 'text-blue-600' : 'text-white'
+            }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <FaTimes /> : <FaBars />}

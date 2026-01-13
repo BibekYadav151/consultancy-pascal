@@ -42,53 +42,102 @@ const Home = () => {
 
   return (
     <div className="bg-white">
-      {/* Hero Section */}
-      <section className="relative h-screen min-h-[700px] flex items-center pt-20">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1523050335192-ce11558cd97d?auto=format&fit=crop&q=80&w=2000" 
-            className="w-full h-full object-cover"
-            alt="Hero Background"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-pascal-blue/90 to-pascal-blue/40"></div>
+      {/* Hero Section - Aceternity UI Inspired */}
+      <section className="relative h-screen min-h-[100vh] flex items-center justify-center overflow-hidden">
+        {/* Animated Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-700/20 via-transparent to-transparent"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-purple-700/10 via-transparent to-transparent"></div>
+          
+          {/* Animated Grid Pattern */}
+          <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+          
+          {/* Floating Orbs */}
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/30 rounded-full blur-[120px] animate-float"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px] animate-float-delayed"></div>
         </div>
 
-        <div className="container mx-auto px-4 md:px-8 relative z-10 text-white">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-6">
-              Unlock Your <br />
-              <span className="text-orange-500 text-shadow">Learning Potential</span>
+        {/* Content Container */}
+        <div className="container mx-auto px-6 md:px-12 lg:px-16 relative z-10">
+          <div className="max-w-5xl mx-auto text-center">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 backdrop-blur-sm mb-8 animate-fade-in-up">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+              </span>
+              <span className="text-sm font-medium text-blue-200">Empowering learners worldwide</span>
+            </div>
+
+            {/* Two-Line Bold Headline with Gradient */}
+            <h1 className="mb-8 animate-fade-in-up animation-delay-100">
+              <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.1] mb-2">
+                Transform Your
+              </span>
+              <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-blue-400 via-cyan-300 to-purple-400 bg-clip-text text-transparent leading-[1.1]">
+                Learning Journey
+              </span>
             </h1>
-            <p className="text-xl md:text-2xl text-blue-50 mb-10 leading-relaxed font-light">
-              Discover world-class education programs and expert-led classes designed to help you 
-              achieve your academic and professional goals.
+
+            {/* Subtitle */}
+            <p className="text-lg sm:text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto mb-12 leading-relaxed font-light animate-fade-in-up animation-delay-200">
+              Discover world-class education programs and expert-led classes designed to help you achieve your academic and professional goals.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <Link to="/programs" className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 text-lg rounded-lg font-semibold transition">
-                Explore Programs
+
+            {/* CTA Buttons with Glow Effect */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up animation-delay-300">
+              <Link 
+                to="/programs" 
+                className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white transition-all duration-300 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:shadow-[0_0_40px_rgba(59,130,246,0.6)] hover:scale-105 hover:-translate-y-1 overflow-hidden w-full sm:w-auto"
+              >
+                <span className="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur"></span>
+                <span className="relative flex items-center gap-2">
+                  Get Started Now
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </span>
               </Link>
-              <Link to="/classes" className="bg-white/10 backdrop-blur-sm border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 text-lg rounded-lg font-semibold transition">
-                Browse Classes
+              
+              <Link 
+                to="/classes" 
+                className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white transition-all duration-300 rounded-full border-2 border-slate-600 hover:border-blue-400 backdrop-blur-sm hover:bg-white/5 hover:shadow-[0_0_30px_rgba(148,163,184,0.3)] hover:scale-105 hover:-translate-y-1 w-full sm:w-auto"
+              >
+                <span className="relative flex items-center gap-2">
+                  Browse Classes
+                </span>
               </Link>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="mt-20 pt-12 border-t border-slate-700/50 animate-fade-in-up animation-delay-400">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">10+</div>
+                  <div className="text-sm text-slate-400 uppercase tracking-wider">Years Experience</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">5000+</div>
+                  <div className="text-sm text-slate-400 uppercase tracking-wider">Students</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">50+</div>
+                  <div className="text-sm text-slate-400 uppercase tracking-wider">Expert Instructors</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">98%</div>
+                  <div className="text-sm text-slate-400 uppercase tracking-wider">Success Rate</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Search/Filter Bar (Floating) */}
-      <section className="container mx-auto px-4 -mt-12 relative z-20">
-        <div className="bg-white rounded-2xl shadow-xl p-4 md:p-8 flex flex-col md:flex-row gap-4 items-center">
-          <div className="flex-1 w-full relative">
-            <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-            <input 
-              type="text" 
-              placeholder="Search courses, universities, or countries..." 
-              className="w-full pl-12 pr-4 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-pascal-blue focus:border-transparent outline-none transition-all"
-            />
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-slate-600 rounded-full p-1">
+            <div className="w-1.5 h-2.5 bg-slate-500 rounded-full mx-auto animate-scroll-indicator"></div>
           </div>
-          <Link to="/universities" className="btn-pascal-blue w-full md:w-auto px-10 py-4">
-            Search
-          </Link>
         </div>
       </section>
 
