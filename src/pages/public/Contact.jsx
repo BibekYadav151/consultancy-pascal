@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
-import { enquiriesAPI, countriesAPI, settingsAPI } from "../../services/api";
+import { enquiriesAPI, settingsAPI } from "../../services/api";
 
 const Contact = () => {
-  const [countries, setCountries] = useState([]);
   const [settings, setSettings] = useState({});
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -14,18 +13,14 @@ const Contact = () => {
     name: "",
     email: "",
     phone: "",
-    country_id: "",
-    message: subject ? `I am interested in: ${subject}` : "",
+    subject: subject || "",
+    message: "",
   });
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    countriesAPI.getAll({ status: "active" })
-      .then((response) => setCountries(response.data || []))
-      .catch((error) => console.error("Failed to fetch countries:", error));
-
     settingsAPI.getAll()
       .then((response) => setSettings(response.data))
       .catch((error) => console.error("Failed to fetch settings:", error));
@@ -48,7 +43,7 @@ const Contact = () => {
         name: "",
         email: "",
         phone: "",
-        country_id: "",
+        subject: "",
         message: "",
       });
     } catch (err) {
@@ -200,20 +195,15 @@ const Contact = () => {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-bold text-gray-700">Interested Destination</label>
-                      <select
-                        name="country_id"
-                        value={formData.country_id}
+                      <label className="text-sm font-bold text-gray-700">Subject</label>
+                      <input
+                        type="text"
+                        name="subject"
+                        value={formData.subject}
                         onChange={handleChange}
-                        className="w-full p-4 rounded-xl bg-gray-50 border-transparent focus:bg-white focus:ring-2 focus:ring-pascal-blue focus:border-transparent transition-all outline-none"
-                      >
-                        <option value="">Select a country</option>
-                        {countries.map((country) => (
-                          <option key={country.id} value={country.id}>
-                            {country.name}
-                          </option>
-                        ))}
-                      </select>
+                        placeholder="Subject of your inquiry"
+                        className="w-full p-4 rounded-xl bg-gray-50 border-transparent focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
+                      />
                     </div>
                   </div>
 

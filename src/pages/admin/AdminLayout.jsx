@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { FaGlobe, FaUniversity, FaBlog, FaEnvelope, FaSignOutAlt, FaCog } from 'react-icons/fa';
+import { FaBook, FaGraduationCap, FaEnvelope, FaSignOutAlt, FaCog, FaTachometerAlt } from 'react-icons/fa';
 import { useAuth } from '../../context/AuthContext';
 import './AdminDashboard.css';
 
@@ -26,7 +26,7 @@ const AdminLayout = () => {
     <div className="admin-dashboard">
       <aside className="admin-sidebar">
         <div className="sidebar-header">
-          <h2>BIG Dashboard</h2>
+          <h2>Admin Panel</h2>
           <p>{user?.name}</p>
         </div>
         <nav className="sidebar-nav">
@@ -34,27 +34,21 @@ const AdminLayout = () => {
             to="/admin/dashboard"
             className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
           >
-            Dashboard
+            <FaTachometerAlt /> Dashboard
           </NavLink>
 
-          <div className="nav-section">Management</div>
+          <div className="nav-section">Content Management</div>
           <NavLink
-            to="/admin/countries"
+            to="/admin/classes"
             className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
           >
-            <FaGlobe /> Countries
+            <FaBook /> Classes
           </NavLink>
           <NavLink
-            to="/admin/universities"
+            to="/admin/programs"
             className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
           >
-            <FaUniversity /> Universities
-          </NavLink>
-          <NavLink
-            to="/admin/blogs"
-            className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
-          >
-            <FaBlog /> Blogs
+            <FaGraduationCap /> Programs
           </NavLink>
           <NavLink
             to="/admin/enquiries"

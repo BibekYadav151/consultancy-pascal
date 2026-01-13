@@ -1,9 +1,14 @@
 import express from 'express';
 import { PartnerController } from '../modules/partner/partner.controller.js';
 import { asyncHandler } from '../middleware/asyncHandler.js';
+import { getDashboardStats } from '../modules/partner/dashboardController.js';
+import { authenticateToken } from '../middleware/auth.js';
 
 const router = express.Router();
 const partnerController = new PartnerController();
+
+// Dashboard stats
+router.get('/dashboard/stats', authenticateToken, getDashboardStats);
 
 // Get all partners
 router.get('/', asyncHandler((req, res) => partnerController.getAll(req, res)));
