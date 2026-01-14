@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import { enquiriesAPI, settingsAPI } from "../../services/api";
+import AppointmentModal from "../../components/common/AppointmentModal";
 
 const Contact = () => {
+  const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
   const [settings, setSettings] = useState({});
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -56,28 +58,28 @@ const Contact = () => {
   return (
     <div className="pt-20 bg-gray-50">
       {/* Hero Section */}
-      <section className="bg-pascal-blue py-20 text-white">
+      <section className="bg-pascal-blue py-12 text-white">
         <div className="container mx-auto px-4 md:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
-          <p className="text-xl text-blue-100 max-w-2xl mx-auto">
+          <h1 className="text-3xl md:text-4xl font-bold mb-3">Contact Us</h1>
+          <p className="text-base md:text-lg text-blue-100 max-w-2xl mx-auto">
             Have questions? Our team of expert counselors is ready to guide you.
           </p>
         </div>
       </section>
 
-      <section className="py-20">
+      <section className="py-12">
         <div className="container mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             {/* Contact Information */}
-            <div className="lg:col-span-5 space-y-10">
+            <div className="lg:col-span-5 space-y-6">
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">Get In Touch</h2>
-                <p className="text-gray-600 text-lg leading-relaxed">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">Get In Touch</h2>
+                <p className="text-gray-600 text-base leading-relaxed">
                   Start your journey today. Fill out the form or reach out to us through any of our contact channels.
                 </p>
               </div>
 
-              <div className="space-y-6">
+              <div className="space-y-4">
                 <div className="flex items-start gap-6 p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
                   <div className="w-12 h-12 bg-orange-100 text-pascal-orange rounded-xl flex items-center justify-center text-xl flex-shrink-0">
                     <FaMapMarkerAlt />
@@ -233,6 +235,7 @@ const Contact = () => {
           </div>
         </div>
       </section>
+      <AppointmentModal isOpen={isAppointmentModalOpen} onClose={() => setIsAppointmentModalOpen(false)} />
     </div>
   );
 };

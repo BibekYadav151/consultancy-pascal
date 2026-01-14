@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import AppointmentModal from '../common/AppointmentModal';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -78,16 +80,16 @@ const Navbar = () => {
           </ul>
 
           <div className="hidden lg:block">
-            <Link 
-              to="/contact" 
+            <button
+              onClick={() => setIsAppointmentModalOpen(true)}
               className={`text-sm px-6 py-3 rounded-full font-semibold transition-all duration-300 inline-block ${
                 isScrolled || !isHomePage
                   ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:shadow-lg hover:scale-105'
                   : 'bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-blue-600'
               }`}
             >
-              Apply Now
-            </Link>
+              Book Appointment
+            </button>
           </div>
 
           {/* Mobile Toggle */}
@@ -117,13 +119,17 @@ const Navbar = () => {
               </li>
             ))}
             <li className="pt-2">
-              <Link to="/contact" className="w-full btn-pascal-orange">
-                Apply Now
-              </Link>
+              <button
+                onClick={() => setIsAppointmentModalOpen(true)}
+                className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-3 rounded-full font-semibold text-center"
+              >
+                Book Appointment
+              </button>
             </li>
           </ul>
         </div>
       </div>
+      <AppointmentModal isOpen={isAppointmentModalOpen} onClose={() => setIsAppointmentModalOpen(false)} />
     </nav>
   );
 };

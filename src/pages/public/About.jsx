@@ -1,45 +1,49 @@
 import React from 'react';
 import { FaCheckCircle, FaAward, FaGlobe, FaUsers, FaLightbulb, FaEye, FaHandshake, FaUserGraduate, FaBookOpen, FaGraduationCap, FaUniversity, FaStar, FaBullseye, FaChartLine } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import AppointmentModal from '../../components/common/AppointmentModal';
+import { useState } from 'react';
 
 const About = () => {
+  const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
+
   return (
     <div className="pt-20">
       {/* Hero Section */}
-      <section className="relative py-24 bg-pascal-blue text-white overflow-hidden">
+      <section className="relative py-12 bg-pascal-blue text-white overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-pascal-orange/20 rounded-full -mr-48 -mt-48 blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full -ml-48 -mb-48 blur-3xl"></div>
-        
+
         <div className="container mx-auto px-4 md:px-8 relative z-10 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">About Pascal Education</h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">About Pascal Education</h1>
+          <p className="text-base md:text-lg text-blue-100 max-w-3xl mx-auto leading-relaxed">
             Your bridge to international excellence. We empower students to transcend boundaries and achieve global success through quality education and expert guidance.
           </p>
         </div>
       </section>
 
       {/* Story Section */}
-      <section className="py-24 bg-white">
+      <section className="py-12 bg-white">
         <div className="container mx-auto px-4 md:px-8">
-          <div className="flex flex-col lg:flex-row items-center gap-16">
+          <div className="flex flex-col lg:flex-row items-center gap-10">
             <div className="lg:w-1/2">
               <div className="relative">
-                <img 
-                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1000" 
-                  alt="Our Story" 
+                <img
+                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1000"
+                  alt="Our Story"
                   className="rounded-3xl shadow-2xl w-full"
                 />
-                <div className="absolute -bottom-6 -right-6 bg-pascal-orange text-white p-6 rounded-2xl shadow-xl hidden md:block">
-                  <p className="text-2xl font-bold">Trusted by</p>
-                  <p className="text-4xl font-extrabold">5000+</p>
-                  <p className="text-sm uppercase tracking-wider opacity-90">Students Globally</p>
+                <div className="absolute -bottom-6 -right-6 bg-pascal-orange text-white p-5 rounded-2xl shadow-xl hidden md:block">
+                  <p className="text-xl font-bold">Trusted by</p>
+                  <p className="text-3xl font-extrabold">5000+</p>
+                  <p className="text-xs uppercase tracking-wider opacity-90">Students Globally</p>
                 </div>
               </div>
             </div>
             <div className="lg:w-1/2">
-              <h2 className="text-pascal-blue font-bold uppercase tracking-[0.2em] text-sm mb-4">Our Journey</h2>
-              <h3 className="text-4xl font-bold text-gray-900 mb-6">Redefining Educational Consultancy</h3>
-              <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
+              <h2 className="text-pascal-blue font-bold uppercase tracking-[0.2em] text-xs mb-3">Our Journey</h2>
+              <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Redefining Educational Consultancy</h3>
+              <div className="space-y-5 text-gray-600 text-base leading-relaxed">
                 <p>
                   Pascal Education Consultancy is a premier global education service provider. We are dedicated to empowering students from diverse backgrounds to achieve their academic and career goals through comprehensive pathway programs.
                 </p>
@@ -56,24 +60,24 @@ const About = () => {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="bg-white p-12 rounded-[2.5rem] shadow-sm border border-gray-100 flex flex-col items-center text-center">
-              <div className="w-20 h-20 bg-orange-100 text-pascal-orange rounded-3xl flex items-center justify-center text-4xl mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col items-center text-center">
+              <div className="w-16 h-16 bg-orange-100 text-pascal-orange rounded-3xl flex items-center justify-center text-3xl mb-6">
                 <FaBullseye />
               </div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-6">Our Mission</h3>
-              <p className="text-gray-600 text-lg leading-relaxed">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
+              <p className="text-gray-600 text-base leading-relaxed">
                 To provide students with innovative global education that fosters excellence in academia, accessibility, and global collaboration, paving the way for a brighter, borderless future.
               </p>
             </div>
-            <div className="bg-white p-12 rounded-[2.5rem] shadow-sm border border-gray-100 flex flex-col items-center text-center">
-              <div className="w-20 h-20 bg-blue-100 text-pascal-blue rounded-3xl flex items-center justify-center text-4xl mb-8">
+            <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col items-center text-center">
+              <div className="w-16 h-16 bg-blue-100 text-pascal-blue rounded-3xl flex items-center justify-center text-3xl mb-6">
                 <FaEye />
               </div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-6">Our Vision</h3>
-              <p className="text-gray-600 text-lg leading-relaxed">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
+              <p className="text-gray-600 text-base leading-relaxed">
                 To become the world's leading educational bridge, producing global graduates who are equipped with the skills and confidence to excel in an interconnected world.
               </p>
             </div>
@@ -82,11 +86,11 @@ const About = () => {
       </section>
 
       {/* Core Values */}
-      <section className="py-24 bg-white">
+      <section className="py-12 bg-white">
         <div className="container mx-auto px-4 md:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Core Values</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">Our Core Values</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-base">
               These principles guide our every action and ensure we provide the best service to our students.
             </p>
           </div>
@@ -100,30 +104,30 @@ const About = () => {
               { icon: <FaUsers />, title: "Student Centric", desc: "Your success is our priority. We are here to support you at every step." },
               { icon: <FaChartLine />, title: "Continuous Growth", desc: "Always evolving to meet the changing needs of global education." }
             ].map((v, i) => (
-              <div key={i} className="p-8 rounded-3xl border border-gray-100 hover:border-pascal-blue transition-colors group">
-                <div className="text-3xl text-pascal-blue mb-6 group-hover:scale-110 transition-transform inline-block">
-                  {v.icon}
-                </div>
-                <h4 className="text-xl font-bold text-gray-900 mb-3">{v.title}</h4>
-                <p className="text-gray-600 leading-relaxed">{v.desc}</p>
-              </div>
+             <div key={i} className="p-6 rounded-3xl border border-gray-100 hover:border-pascal-blue transition-colors group">
+               <div className="text-2xl text-pascal-blue mb-4 group-hover:scale-110 transition-transform inline-block">
+                 {v.icon}
+               </div>
+               <h4 className="text-lg font-bold text-gray-900 mb-2">{v.title}</h4>
+               <p className="text-gray-600 text-sm leading-relaxed">{v.desc}</p>
+             </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section Placeholder */}
-      <section className="py-24 bg-gray-50">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between mb-16">
-            <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Expert Team</h2>
-              <p className="text-gray-600 text-lg">Meet the people who make your dreams come true.</p>
             </div>
-            <Link to="/contact" className="btn-pascal-blue mt-6 md:mt-0">Join Our Team</Link>
-          </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            </div>
+            </section>
+
+            {/* Team Section Placeholder */}
+            <section className="py-12 bg-gray-50">
+            <div className="container mx-auto px-4 md:px-8">
+            <div className="flex flex-col md:flex-row items-center justify-between mb-10">
+            <div>
+             <h2 className="text-3xl font-bold text-gray-900 mb-3">Our Expert Team</h2>
+             <p className="text-gray-600 text-base">Meet the people who make your dreams come true.</p>
+            </div>
+            <Link to="/contact" className="btn-pascal-blue mt-4 md:mt-0">Join Our Team</Link>
+            </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { name: "Sushant Pascal", role: "CEO & Founder", img: "https://i.pravatar.cc/300?img=68" },
               { name: "Anita Sharma", role: "Senior Counselor", img: "https://i.pravatar.cc/300?img=45" },
@@ -145,17 +149,21 @@ const About = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-pascal-orange">
+      <section className="py-12 bg-pascal-orange">
         <div className="container mx-auto px-4 md:px-8 text-center text-white">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8">Ready to take the first step?</h2>
-          <p className="text-orange-50 text-xl mb-12 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to take the first step?</h2>
+          <p className="text-orange-50 text-base mb-8 max-w-2xl mx-auto">
             Book a free one-on-one session with our senior counselors and start planning your international education journey today.
           </p>
-          <Link to="/contact" className="px-12 py-5 bg-white text-pascal-orange font-bold rounded-2xl shadow-xl hover:bg-pascal-blue hover:text-white transition-all text-xl">
+          <button
+            onClick={() => setIsAppointmentModalOpen(true)}
+            className="px-10 py-4 bg-white text-pascal-orange font-bold rounded-2xl shadow-xl hover:bg-pascal-blue hover:text-white transition-all text-lg"
+          >
             Get Started Now
-          </Link>
+          </button>
         </div>
       </section>
+      <AppointmentModal isOpen={isAppointmentModalOpen} onClose={() => setIsAppointmentModalOpen(false)} />
     </div>
   );
 };

@@ -6,6 +6,8 @@ export const getDashboardStats = (req, res) => {
     const programsCount = db.prepare('SELECT COUNT(*) as count FROM programs').get();
     const enquiriesCount = db.prepare('SELECT COUNT(*) as count FROM enquiries').get();
     const newEnquiriesCount = db.prepare('SELECT COUNT(*) as count FROM enquiries WHERE status = "new"').get();
+    const appointmentsCount = db.prepare('SELECT COUNT(*) as count FROM appointments').get();
+    const newAppointmentsCount = db.prepare('SELECT COUNT(*) as count FROM appointments WHERE status = "new"').get();
 
     const recentEnquiries = db.prepare('SELECT * FROM enquiries ORDER BY created_at DESC LIMIT 5').all();
 
@@ -14,6 +16,8 @@ export const getDashboardStats = (req, res) => {
       totalPrograms: programsCount.count,
       totalEnquiries: enquiriesCount.count,
       newEnquiries: newEnquiriesCount.count,
+      totalAppointments: appointmentsCount.count,
+      newAppointments: newAppointmentsCount.count,
       recentEnquiries
     };
 

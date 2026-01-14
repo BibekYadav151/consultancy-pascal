@@ -30,12 +30,12 @@ export default function Classes() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div
-        className="relative bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-20"
+        className="relative bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12"
       >
         <div className="absolute inset-0 bg-black opacity-20"></div>
         <div className="container mx-auto px-4 relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Classes</h1>
-          <p className="text-xl text-blue-100 max-w-2xl">
+          <h1 className="text-3xl md:text-4xl font-bold mb-3">Our Classes</h1>
+          <p className="text-base md:text-lg text-blue-100 max-w-2xl">
             Discover our range of expertly designed classes to enhance your skills and knowledge
           </p>
         </div>

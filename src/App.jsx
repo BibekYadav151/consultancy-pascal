@@ -22,6 +22,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminClasses from "./pages/admin/AdminClasses";
 import AdminPrograms from "./pages/admin/AdminPrograms";
 import AdminEnquiries from "./pages/admin/AdminEnquiries";
+import AdminAppointments from "./pages/admin/AdminAppointments";
 import AdminSettings from "./pages/admin/AdminSettings";
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             <Route path="classes" element={<AdminClasses />} />
             <Route path="programs" element={<AdminPrograms />} />
             <Route path="enquiries" element={<AdminEnquiries />} />
+            <Route path="appointments" element={<AdminAppointments />} />
             <Route path="settings" element={<AdminSettings />} />
             <Route
               path="*"
