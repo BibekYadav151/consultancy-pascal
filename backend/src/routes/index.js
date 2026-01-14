@@ -6,6 +6,7 @@ import enquiriesRoutes from './enquiries.routes.js';
 import settingsRoutes from './settings.routes.js';
 import contactRoutes from './contact.routes.js';
 import partnerRoutes from './partner.routes.js';
+import appointmentsRoutes from '../modules/appointments/appointmentRoutes.js';
 
 const router = express.Router();
 
@@ -16,5 +17,6 @@ router.use('/enquiries', enquiriesRoutes);
 router.use('/settings', settingsRoutes);
 router.use('/contact', contactRoutes);
 router.use('/partner', partnerRoutes);
+router.use('/appointments', appointmentsRoutes);
 
 export default router;

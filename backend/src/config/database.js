@@ -74,6 +74,23 @@ const initDatabase = async () => {
       updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 
+    CREATE TABLE IF NOT EXISTS appointments (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      student_name TEXT NOT NULL,
+      email TEXT NOT NULL,
+      phone TEXT NOT NULL,
+      appointment_type TEXT NOT NULL,
+      appointment_date TEXT NOT NULL,
+      appointment_time TEXT NOT NULL,
+      preferred_country TEXT,
+      message TEXT,
+      status TEXT DEFAULT 'new',
+      assigned_counselor TEXT,
+      admin_notes TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+
     CREATE TABLE IF NOT EXISTS settings (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       key TEXT UNIQUE NOT NULL,

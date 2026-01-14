@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaBook, FaGraduationCap, FaEnvelope, FaChartLine } from 'react-icons/fa';
+import { FaBook, FaGraduationCap, FaEnvelope, FaChartLine, FaCalendarCheck } from 'react-icons/fa';
 import axios from 'axios';
 import './AdminDashboard.css';
 
@@ -65,10 +65,13 @@ const AdminDashboard = () => {
           </div>
         </div>
         <div className="stat-card">
-          <FaChartLine className="stat-icon" style={{ color: '#10B981' }} />
+          <FaCalendarCheck className="stat-icon" style={{ color: '#8B5CF6' }} />
           <div>
-            <h3>{(stats?.totalClasses || 0) + (stats?.totalPrograms || 0)}</h3>
-            <p>Total Content</p>
+            <h3>{stats?.totalAppointments || 0}</h3>
+            <p>Total Appointments</p>
+            {stats?.newAppointments > 0 && (
+              <span className="badge">{stats.newAppointments} new</span>
+            )}
           </div>
         </div>
       </div>
@@ -124,6 +127,10 @@ const AdminDashboard = () => {
           <Link to="/admin/enquiries" className="action-card">
             <FaEnvelope size={24} />
             <span>View Enquiries</span>
+          </Link>
+          <Link to="/admin/appointments" className="action-card">
+            <FaCalendarCheck size={24} />
+            <span>View Appointments</span>
           </Link>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { FaBook, FaGraduationCap, FaEnvelope, FaSignOutAlt, FaCog, FaTachometerAlt } from 'react-icons/fa';
+import { FaBook, FaGraduationCap, FaEnvelope, FaSignOutAlt, FaCog, FaTachometerAlt, FaCalendarCheck } from 'react-icons/fa';
 import { useAuth } from '../../context/AuthContext';
 import './AdminDashboard.css';
 
@@ -55,6 +55,12 @@ const AdminLayout = () => {
             className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
           >
             <FaEnvelope /> Enquiries
+          </NavLink>
+          <NavLink
+            to="/admin/appointments"
+            className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
+          >
+            <FaCalendarCheck /> Appointments
           </NavLink>
 
           <div className="nav-section">Settings</div>

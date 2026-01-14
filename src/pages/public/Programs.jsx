@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import AppointmentModal from "../../components/common/AppointmentModal";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
@@ -8,6 +9,7 @@ export default function Programs() {
   const [programs, setPrograms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("all");
+  const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
 
   useEffect(() => {
     fetchPrograms();
@@ -32,12 +34,12 @@ export default function Programs() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div
-        className="relative bg-gradient-to-r from-purple-600 to-pink-600 text-white py-20"
+        className="relative bg-gradient-to-r from-purple-600 to-pink-600 text-white py-12"
       >
         <div className="absolute inset-0 bg-black opacity-20"></div>
         <div className="container mx-auto px-4 relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Programs</h1>
-          <p className="text-xl text-purple-100 max-w-2xl">
+          <h1 className="text-3xl md:text-4xl font-bold mb-3">Our Programs</h1>
+          <p className="text-base md:text-lg text-purple-100 max-w-2xl">
             Explore our comprehensive educational programs designed to help you achieve your goals
           </p>
         </div>
@@ -74,15 +76,16 @@ export default function Programs() {
               <ProgramCard key={program.id} program={program} />
             ))}
           </div>
-        )}
-      </div>
-    </div>
-  );
-}
+          )}
+          </div>
+          </div>
+          <AppointmentModal isOpen={isAppointmentModalOpen} onClose={() => setIsAppointmentModalOpen(false)} />
+          );
+          }
 
-function ProgramCard({ program }) {
-  return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow overflow-hidden group">
+          function ProgramCard({ program }) {
+          return (
+          <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow overflow-hidden group">
       {program.image && (
         <div className="relative h-48 overflow-hidden">
           <img
